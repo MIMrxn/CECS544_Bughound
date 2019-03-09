@@ -1,0 +1,59 @@
+input[type=text], select {
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45A049;
+}
+
+form[name=add_employee_form] {
+    margin: auto;
+    width: 275px;
+    height: 225px;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    padding: 20px;
+    overflow: scroll;
+}
+
+form[name=new_report_form] {
+    width: 1000px;
+    height: 425px;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    padding: 20px;
+    overflow: scroll;
+}
+
+textarea {
+    resize: none;
+}
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: #45A049;
+}

@@ -1,0 +1,32 @@
+.vertical-menu {
+    margin: auto;
+    display: block;
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #E7E7E7;
+    background-color: #F3F3F3;
+}
+
+.vertical-menu a {
+    margin: auto;
+    display: block;
+    background-color: #EEE;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border: 1px solid #4CAF50;
+}
+
+.vertical-menu a:hover {
+    background-color: #DDD;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
