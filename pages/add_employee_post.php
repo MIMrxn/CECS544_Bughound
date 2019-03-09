@@ -6,7 +6,12 @@
     </head>
     <body>
         <h2>
+            <!-- ADD YOUR DB INFO HERE -->
             <?php
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+
                 $first_name = $_POST['first_name'];
                 $last_name = $_POST['last_name'];
                 $user_name = $_POST['user_name'];
@@ -21,9 +26,6 @@
                 }
                 $user_level = $_POST['user_level'];
                 
-                $servername = "";
-                $username = "";
-                $password = "";
                 $conn = new mysqli($servername, $username, $password);
                 mysqli_select_db($conn, "bughound_db");
                 $query = "INSERT INTO employees (first_name, last_name, user_name, password, position, group_num, is_reporter, user_level) VALUES ('".$first_name."','".$last_name."','".$user_name."','".$user_pass."','".$position."','".$group_num."','".$is_reporter."','".$user_level."')";

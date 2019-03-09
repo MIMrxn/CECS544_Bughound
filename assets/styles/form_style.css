@@ -40,6 +40,16 @@ form[name=new_report_form] {
     overflow: scroll;
 }
 
+form[name=search_employees_form] {
+    margin: auto;
+    width: 275px;
+    height: 210px;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    padding: 20px;
+    overflow: scroll;
+}
+
 textarea {
     resize: none;
 }
