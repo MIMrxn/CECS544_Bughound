@@ -66,7 +66,7 @@
                     <td><input type="submit" name="search_prog_input" value="Search by Program Release Date" /></td>
                 </tr>     
             </table>
-            <input class="button" type="button" onclick="window.location.replace('edit_program.php')" value="Cancel" />
+            <input class="button" type="button" onclick="window.location.replace('search_program.php?source=<?php echo $source; ?>')" value="Cancel" />
         </form>
 
         <script language=Javascript>

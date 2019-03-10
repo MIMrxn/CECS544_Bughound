@@ -73,7 +73,7 @@
                     alert ("User name field must contain characters");
                     return false;
                 }
-                if(theform.password.value === ""){
+                if(theform.user_pass.value === ""){
                     alert ("Password field must contain characters");
                     return false;
                 }
