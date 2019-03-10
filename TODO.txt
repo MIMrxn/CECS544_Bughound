@@ -4,7 +4,7 @@ Finish employee POST search, edit, and delete.
 Finish create bug report form.
 
 Start update bug report form.
-Start program management pages: Create, Edit, Delete, Search and POST pages.
+Start program management pages: Edit, Search and POST pages.
 Start functional areas management pages: Create, Edit, Delete, Search and POST pages.
 Start releases management pages: Create, Edit, Delete, Search and POST pages.
 Convert to MVC.
