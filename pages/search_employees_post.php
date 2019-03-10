@@ -9,8 +9,8 @@
     <body>
         <!-- ADD YOUR DB INFO HERE -->
         <?php
-            $servername = "";
-            $username = "";
+            $servername = "localhost";
+            $username = "root";
             $password = "";
             $conn = new mysqli($servername, $username, $password);
             mysqli_select_db($conn, "bughound_db");
@@ -44,6 +44,14 @@
                 $search_emps_input = $_POST['search_emps_input'];
                 $sql = "";
                 
+                $source = $_GET['source'];
+                if($source == 'edit') {
+                    echo "<h2>Results for Employees to Edit\n</h2><h3>Click on employee ID number to edit.</h3>";
+                }
+                if($source == 'delete') {
+                    echo "<h2>Results for Employees to Delete\n</h2><h3>Click on employee ID number to delete.</h3>";
+                }
+
                 $first_name = $_POST['first_name'];
                 $last_name = $_POST['last_name'];
                 $user_name = $_POST['user_name'];
@@ -75,10 +83,17 @@
 
                 $none = 0;
                 $result = $conn->query($sql);
+
                 echo "<table border=1><th>ID</th><th>First Name</th><th>Last Name</th><th>Username</th><th>Password</th><th>Position</th><th>Group Number</th><th>Is Reporter</th><th>User Level</th>\n";
                 while($row=mysqli_fetch_row($result)) {
                     $none=1;
-                    printf("<tr><td><a href='edit_employee.php?emp_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8]);
+                    if($source == 'edit') {
+                        printf("<tr><td><a href='edit_employee.php?emp_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8]);
+                    }
+                    if($source == 'delete') {
+                        printf("<tr><td><a onclick='return confirm_delete(%d);' href='delete_employee.php?emp_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8]);
+                    }
+                    
                 }
                 echo "</table>";
                 
@@ -89,5 +104,12 @@
                 $conn->close();
             ?>
         </h2>
+
+        <script type="text/javascript">
+            function confirm_delete(emp_id) {
+                var str = "Are you sure you want to delete employee ".concat(emp_id, "?");
+                return confirm(str);
+            }
+        </script>
     </body>
 </html>

@@ -47,7 +47,7 @@
             </center>
         </h2>
 
-        <form name="search_employees_form" action="search_employees_post.php" method="post" onsubmit="return validate(this)">
+        <form name="search_employees_form" action="search_employees_post.php?source=<?php echo $source; ?>" method="post" onsubmit="return validate(this)">
             <table>
                 <tr>
                     <td>First Name:</td><td><input type="Text" name="first_name" /></td>
