@@ -34,9 +34,9 @@
 
         <div class="vertical-menu">
             <a href="add_program.php">Add a new program</a>
-            <a href="edit_program.php">Edit program information</a>
-            <a href="delete_program.php">Delete a program</a>
-            <a href="search_programs.php">Search for a program</a>     
+            <a href="search_program.php?source=edit">Edit program information</a>
+            <a href="search_program.php?source=delete">Delete a program</a>
+            <a href="search_program.php?source=search">Search for a program</a>     
         </div>
 
     </body>

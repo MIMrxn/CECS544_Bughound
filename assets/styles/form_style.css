@@ -50,6 +50,16 @@ form[name=search_employees_form] {
     overflow: scroll;
 }
 
+form[name=edit_search_programs_form] {
+    margin: auto;
+    width: 460px;
+    height: 260px;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    padding: 20px;
+    overflow: scroll;
+}
+
 textarea {
     resize: none;
 }
