@@ -1,6 +1,6 @@
 TODO:
 
-Finish employee POST search, edit, and delete.
+Finish employee POST feedback dialogue.
 Finish create bug report form.
 
 Start update bug report form.
