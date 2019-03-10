@@ -51,6 +51,9 @@
                 if($source == 'delete') {
                     echo "<h2>Results for Employees to Delete\n</h2><h3>Click on employee ID number to delete.</h3>";
                 }
+                if($source == 'search') {
+                    echo "<h2>Results for Employees Search\n</h2>";
+                }
 
                 $first_name = $_POST['first_name'];
                 $last_name = $_POST['last_name'];
@@ -93,7 +96,9 @@
                     if($source == 'delete') {
                         printf("<tr><td><a onclick='return confirm_delete(%d);' href='delete_employee.php?emp_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8]);
                     }
-                    
+                    if($source == 'search') {
+                        printf("<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8]);
+                    }
                 }
                 echo "</table>";
                 

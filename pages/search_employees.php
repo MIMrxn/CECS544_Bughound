@@ -87,7 +87,7 @@
                     <td><input type="submit" name="search_emps_input" value="Search by User Level" /></td>
                 </tr>      
             </table>
-            <input class="button" type="button" onclick="window.location.replace('search_employees.php')" value="Cancel" />
+            <input class="button" type="button" onclick="window.location.replace('search_employees.php?source=<?php echo $source; ?>')" value="Cancel" />
         </form>
 
         <script language=Javascript>
