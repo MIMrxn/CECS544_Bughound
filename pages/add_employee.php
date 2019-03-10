@@ -86,7 +86,7 @@
                     return false;
                 }
                 if(theform.user_level.value === ""){
-                    alert ("User name field must contain characters");
+                    alert ("User level field must contain characters");
                     return false;
                 }
                 return true;

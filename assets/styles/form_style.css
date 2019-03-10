@@ -42,8 +42,8 @@ form[name=new_report_form] {
 
 form[name=search_employees_form] {
     margin: auto;
-    width: 275px;
-    height: 210px;
+    width: 450px;
+    height: 360px;
     border-radius: 5px;
     background-color: #F2F2F2;
     padding: 20px;

@@ -34,11 +34,9 @@
 
         <div class="vertical-menu">
             <a href="add_employee.php">Add a new employee</a>
-            <!--<a href="edit_employee.php">Edit employee information</a>
-            <a href="delete_employee.php">Delete an employee</a>-->
             <a href="search_employees.php?source=edit">Edit employee information</a>
             <a href="search_employees.php?source=delete">Delete an employee</a>
-            <a href="search_employees.php">Search for an employee</a>     
+            <a href="search_employees.php?source=search">Search for an employee</a>     
         </div>
 
     </body>

@@ -10,8 +10,8 @@
         <h3>
             <!-- ADD YOUR DB INFO HERE -->
             <?php
-                $servername = "localhost";
-                $username = "root";
+                $servername = "";
+                $username = "";
                 $password = "";
                 $conn = new mysqli($servername, $username, $password);
                 mysqli_select_db($conn, "bughound_db");
