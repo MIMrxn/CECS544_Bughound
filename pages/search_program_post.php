@@ -80,7 +80,7 @@
                         printf("<tr><td><a href='edit_program.php?program_name=%s'>%s</a></td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0], $row[0], $row[1],$row[2],$row[3]);
                     }
                     if($source == 'delete') {
-                        printf("<tr><td><a href='edit_program.php?program_name=%s'>%s</a></td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0], $row[0], $row[1],$row[2],$row[3]);
+                        printf("<tr><td><a onclick='return confirm_delete(%s);' href='delete_program.php?program_name=%s'>%s</a></td><td>%d</td><td>%d</td><td>%s</td></tr>\n",$row[0],$row[0],$row[0],$row[1],$row[2],$row[3]);
                     }
                     if($source == 'search') {
                         printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[1],$row[2],$row[3]);
@@ -97,8 +97,8 @@
         </h2>
 
         <script type="text/javascript">
-            function confirm_delete(emp_id) {
-                var str = "Are you sure you want to delete the program ".concat(emp_id, "?");
+            function confirm_delete(program_name) {
+                var str = "Are you sure you want to delete the program ".concat(program_name, "?");
                 return confirm(str);
             }
         </script>
