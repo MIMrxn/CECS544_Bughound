@@ -2,7 +2,7 @@ TODO:
 
 Finish POST feedback dialogue.
 	Feedback after editing and deleting.
-Finish create bug report form.
+Finish create bug report POST and date validation.
 
 Create login/register pages.
 Start update bug report form.
