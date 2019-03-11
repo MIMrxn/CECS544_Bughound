@@ -1,10 +1,11 @@
 TODO:
 
-Finish employee POST feedback dialogue.
+Finish POST feedback dialogue.
+	Feedback after editing and deleting.
 Finish create bug report form.
 
+Create login/register pages.
 Start update bug report form.
 Start program management pages: Search and POST page.
-Start functional areas management pages: Create, Edit, Delete, Search and POST pages.
 Start releases management pages: Create, Edit, Delete, Search and POST pages.
 Convert to MVC.
