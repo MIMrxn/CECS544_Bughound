@@ -5,6 +5,7 @@
         <title>Bughound</title>
         <link rel="stylesheet" href="../assets/styles/nav_menu_style.css">
         <link rel="stylesheet" href="../assets/styles/vertical_menu_style.css">
+        <link rel="stylesheet" href="../assets/styles/form_style.css">
     </head>
     <body>
         <ul>
@@ -30,14 +31,24 @@
             </li>
         </ul>
 
-        <h2><center><font color="gray">Functional Area Management Options</font></center></h2>
+        <h2><center><font color="gray">Add a Functional Area Entry</font></center></h2>
 
-        <div class="vertical-menu">
-            <a href="add_functional_area.php">Add a new functional area</a>
-            <a href="search_functional_areas.php?source=edit">Edit a functional area's information</a>
-            <a href="search_functional_areas.php?source=delete">Delete a functional area</a>
-            <a href="search_functional_areas.php?source=search">Search for a functional area</a>         
-        </div>
+        <form name="add_functional_area_form" action="add_functional_area_post.php" method="post" onsubmit="return validate(this)">
+            <table>
+                <tr><td>Area Name:</td><td><input type="Text" name="area_name" /></td></tr>    
+            </table>
+            <input type="submit" name="submit" value="Submit" />
+            <input class="button" type="button" onclick="window.location.replace('add_functional_area.php')" value="Cancel" />
+        </form>
 
+        <script language=Javascript>
+            function validate(theform) {
+                if(theform.area_name.value === ""){
+                    alert ("Area Name field must contain characters");
+                    return false;
+                }
+                return true;
+            }
+        </script>
     </body>
 </html>
