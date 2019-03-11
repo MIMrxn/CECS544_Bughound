@@ -48,7 +48,16 @@
                     <td>Program:</td>
                     <td>
                         <select>
-                            <option value="program">Select Program</option>
+							<!-- Get all program info from DB here -->
+							<?php
+                                $sql = "SELECT program_name FROM programs";
+                                $result = $conn->query($sql);
+                                while($row=$result->fetch_assoc()) {
+                                    $program_name = $row['program_name'];
+                                    echo '<option value="'.program_name.'">'.$program_name.'</option>';
+                                }
+                            ?>
+							
                         </select>
                     </td>
                     <td>Report Type:</td>
@@ -118,10 +127,19 @@
                     <td>Functional Area:</td>
                     <td>
                         <select>
-                            <option value="area">Area1</option>
+							<!-- Get all program info from DB here -->
+							<?php
+                                $sql = "SELECT area_name FROM areas";
+                                $result = $conn->query($sql);
+                                while($row=$result->fetch_assoc()) {
+                                    $area_name = $row['area_name'];
+                                    echo '<option value="'.area_name.'">'.$area_name.'</option>';
+                                }
+                            ?>
+							
                         </select>
                     </td>
-                    <td>Assignet To:</td>
+                    <td>Assigned To:</td>
                     <td>
                         <select>
                             <?php
@@ -150,7 +168,7 @@
                     <td>Priority:</td>
                     <td>
                         <select>
-                            <option value="one">1. Fix immediatly</option>
+                            <option value="one">1. Fix immediately</option>
                             <option value="two">2. Fix as soon as possible</option>
                             <option value="three">3. Fix before next milestone</option>
                             <option value="four">4. Fix before release</option>
