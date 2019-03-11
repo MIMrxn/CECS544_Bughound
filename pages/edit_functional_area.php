@@ -4,9 +4,28 @@
         <meta charset="UTF-8">
         <title>Bughound</title>
         <link rel="stylesheet" href="../assets/styles/nav_menu_style.css">
+        <link rel="stylesheet" href="../assets/styles/vertical_menu_style.css">
         <link rel="stylesheet" href="../assets/styles/form_style.css">
     </head>
     <body>
+        <!-- ADD YOUR DB INFO HERE -->
+        <?php
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $conn = new mysqli($servername, $username, $password);
+            mysqli_select_db($conn, "bughound_db");
+
+            $area_id = $_GET['area_id'];
+
+            $sql = "SELECT * FROM areas WHERE area_id = $area_id";
+
+            $result = $conn->query($sql);
+            $row = mysqli_fetch_row($result);
+            $area_name = $row[1];
+            
+            $conn->close();
+        ?>
         <ul>
             <li><a href="index.php">Home</a></li>
             <li class="dropdown">
@@ -30,36 +49,19 @@
             </li>
         </ul>
 
-        <h2>
-            <center>
-                <?php
-                    $source = $_GET['source'];
-                    if($source == 'edit') {
-                        echo '<font color="gray">Search for a Functional Area to Edit Entry</font>';
-                    }
-                    if($source == 'delete') {
-                        echo '<font color="gray">Search for a Functional Area to Delete Entry</font>';
-                    }
-                    if($source == 'search') {
-                        echo '<font color="gray">Search for a Functional Area Entry</font>';
-                    }
-                ?>
-            </center>
-        </h2>
+        <h2><center><font color="gray">Edit a Functional Area Entry</font></center></h2>
 
-        <form name="search_functional_areas_form" action="search_functional_areas_post.php?source=<?php echo $source; ?>" method="post" onsubmit="return validate(this)">
+        <form name="add_functional_area_form" action="edit_functional_area_post.php?area_id=<?php echo $area_id; ?>" method="post" onsubmit="return validate(this)">
             <table>
-                <tr>
-                    <td>Area Name:</td><td><input type="Text" name="area_name" /></td>
-                    <td><input type="submit" name="search_functional_areas_input" value="Search by Area Name" /></td>
-                </tr>  
+                <tr><td>Area Name:</td><td><input type="Text" name="area_name" value="<?php echo $area_name; ?>" /></td></tr>    
             </table>
-            <input class="button" type="button" onclick="window.location.replace('search_functional_areas.php?source=<?php echo $source; ?>')" value="Cancel" />
+            <input type="submit" name="submit" value="Edit" />
+            <input class="button" type="button" onclick="window.location.replace('manage_functional_areas.php')" value="Cancel" />
         </form>
 
         <script language=Javascript>
             function validate(theform) {
-                if(theform.area_name.value === "") {
+                if(theform.area_name.value === ""){
                     alert ("Area Name field must contain characters");
                     return false;
                 }
