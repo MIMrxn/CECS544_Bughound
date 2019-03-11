@@ -105,7 +105,7 @@
                     ?>
                     
                 </tr>
-                <tr><td>User Level:</td><td><input type="Text" name="user_level" value="<?php echo $user_level; ?>" /></td></tr>      
+                <tr><td>User Level:</td><td><input type="Number" name="user_level" value="<?php echo $user_level; ?>" /></td></tr>      
             </table>
             <input type="submit" name="submit" value="Edit" />
             <input class="button" type="button" onclick="window.location.replace('manage_employees.php')" value="Cancel" />
@@ -137,8 +137,8 @@
                     alert ("Group number field must contain a number");
                     return false;
                 }
-                if(theform.user_level.value === ""){
-                    alert ("User name field must contain characters");
+				if(theform.user_level.value === ""){
+                    alert ("User Level field must contain a number from 1-5");
                     return false;
                 }
                 return true;

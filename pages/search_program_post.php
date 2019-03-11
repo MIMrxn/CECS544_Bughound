@@ -52,7 +52,7 @@
                     echo "<h2>Results for Program Information to Delete\n</h2><h3>Click on a Program Name to delete.</h3>";
                 }
 				if($source == 'search') {
-                    echo "<h2>Results for Program Inforamtion\n</h2><h3></h3>";
+                    echo "<h2>Results for Program Information\n</h2><h3></h3>";
                 }
 
                 $program_name = $_POST['program_name'];
@@ -82,7 +82,9 @@
                     if($source == 'delete') {
                         printf("<tr><td><a href='edit_program.php?program_name=%s'>%s</a></td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0], $row[0], $row[1],$row[2],$row[3]);
                     }
-                    
+                    if($source == 'search') {
+                        printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[1],$row[2],$row[3]);
+                    }
                 }
                 echo "</table>";
                 

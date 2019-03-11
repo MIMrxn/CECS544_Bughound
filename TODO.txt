@@ -6,6 +6,5 @@ Finish create bug report form.
 
 Create login/register pages.
 Start update bug report form.
-Start program management pages: Search and POST page.
 Start releases management pages: Create, Edit, Delete, Search and POST pages.
 Convert to MVC.

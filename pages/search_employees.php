@@ -83,7 +83,7 @@
                     <td><input type="submit" name="search_emps_input" value="Search by Is a Reporter" /></td>
                 </tr>
                 <tr>
-                    <td>User Level:</td><td><input type="Text" name="user_level" /></td>
+                    <td>User Level:</td><td><input type="Number" name="user_level" /></td>
                     <td><input type="submit" name="search_emps_input" value="Search by User Level" /></td>
                 </tr>      
             </table>
@@ -112,8 +112,8 @@
                     alert ("Group number field must contain a number");
                     return false;
                 }
-                if(theform.user_level.value === "" && theform.search_emps_input === "Search by User Level") {
-                    alert ("User Level field must contain characters");
+                if(theform.user_level.value === "" && theform.search_emps_input === "Search by User Level"){
+                    alert ("User Level field must contain a number from 1-5");
                     return false;
                 }
                 return true;

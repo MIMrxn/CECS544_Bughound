@@ -53,7 +53,7 @@
                 </tr>     
                 <tr><td>Group Number</td><td><input type="Text" name="group_num"></td></tr>
                 <tr><td>Is a reporter?</td><td><input type="checkbox" name="is_reporter" value="True" /></td></tr>
-                <tr><td>User Level:</td><td><input type="Text" name="user_level" /></td></tr>      
+                <tr><td>User Level:</td><td><input type="Number" name="user_level" /></td></tr>      
             </table>
             <input type="submit" name="submit" value="Submit" />
             <input class="button" type="button" onclick="window.location.replace('add_employee.php')" value="Cancel" />
@@ -85,8 +85,8 @@
                     alert ("Group number field must contain a number");
                     return false;
                 }
-                if(theform.user_level.value === ""){
-                    alert ("User level field must contain characters");
+                if(theform.user_level.value === "" || theform.user_level.value <= 0 || theform.user_level.value > 5){
+                    alert ("User Level field must contain a number from 1-5");
                     return false;
                 }
                 return true;
