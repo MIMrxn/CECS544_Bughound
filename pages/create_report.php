@@ -55,7 +55,7 @@
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
                                     $program_name = $row['program_name'];
-                                    echo '<option value="'.program_name.'">'.$program_name.'</option>';
+                                    echo '<option value="'.$program_name.'">'.$program_name.'</option>';
                                 }
                             ?>
 							
@@ -114,7 +114,7 @@
                                 while($row=$result->fetch_assoc()) {
                                     $employee_id = $row['employee_id'];
                                     $employee_name = $row['employee_name'];
-                                    echo '<option value="'.employee_id.'">'.$employee_name.'</option>';
+                                    echo '<option value="'.$employee_id.'">'.$employee_name.'</option>';
                                 }
                             ?>
                         </select>
@@ -138,7 +138,7 @@
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
                                     $area_name = $row['area_name'];
-                                    echo '<option value="'.area_name.'">'.$area_name.'</option>';
+                                    echo '<option value="'.$area_name.'">'.$area_name.'</option>';
                                 }
                             ?>
 							
@@ -154,7 +154,7 @@
                                 while($row=$result->fetch_assoc()) {
                                     $employee_id = $row['employee_id'];
                                     $employee_name = $row['employee_name'];
-                                    echo '<option value="'.employee_id.'">'.$employee_name.'</option>';
+                                    echo '<option value="'.$employee_id.'">'.$employee_name.'</option>';
                                 }
                             ?>
                         </select>
@@ -215,7 +215,7 @@
                                 while($row=$result->fetch_assoc()) {
                                     $employee_id = $row['employee_id'];
                                     $employee_name = $row['employee_name'];
-                                    echo '<option value="'.employee_id.'">'.$employee_name.'</option>';
+                                    echo '<option value="'.$employee_id.'">'.$employee_name.'</option>';
                                 }
                             ?>
                         </select>
@@ -232,7 +232,7 @@
                                 while($row=$result->fetch_assoc()) {
                                     $employee_id = $row['employee_id'];
                                     $employee_name = $row['employee_name'];
-                                    echo '<option value="'.employee_id.'">'.$employee_name.'</option>';
+                                    echo '<option value="'.$employee_id.'">'.$employee_name.'</option>';
                                 }
                             ?>
                         </select>
@@ -246,6 +246,20 @@
             <?php
                 $conn->close();
             ?>
+
+            <hr>
+
+            <table>
+                <tr>
+                    <td>Additional Comments:</td>
+                    <td><textarea name="comments" rows="5" cols="50" placeholder="Add and extra information that may be relevant."></textarea></td>
+                </tr>
+                <tr>
+                    <td>Attachments:</td>
+                    <td><input type="file" name="attachments"></td>
+                </tr>
+            </table>
+
             <input type="submit" name="submit_new_report" value="Submit">
             <input class="button" type="button" onclick="window.location.replace('create_report.php')" value="Reset" />
             <input class="button" type="button" onclick="window.location.replace('index.php')" value="Cancel" />
@@ -254,7 +268,7 @@
         <script language=Javascript>
             function validate(theform) {
                 if(theform.program_name.value === "default"){
-                    alert ("Program field must contain characters");
+                    alert ("Program must be selected");
                     return false;
                 }
                 if(theform.report_type.value === "default"){
@@ -301,7 +315,7 @@
                     alert ("Resolution must be selected");
                     return false;
                 }
-                if(theform.resolution_version.value === "default"){
+                if(theform.resolution_version.value === ""){
                     alert ("Resolution version must be filled");
                     return false;
                 }
@@ -309,7 +323,7 @@
                     alert ("Resolved By must be selected");
                     return false;
                 }
-                if(theform.date_resolved.value === "default"){
+                if(theform.date_resolved.value === ""){
                     alert ("Date Resolved must be selected");
                     return false;
                 }
@@ -317,7 +331,7 @@
                     alert ("Tested By must be selected");
                     return false;
                 }
-                if(theform.date_tested.value === "default"){
+                if(theform.date_tested.value === ""){
                     alert ("Date Tested must be selected");
                     return false;
                 }
