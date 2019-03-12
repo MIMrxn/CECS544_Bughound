@@ -4,6 +4,6 @@ Finish POST feedback dialogue.
 	Feedback after editing and deleting.
 
 Create login/register pages.
-Start update bug report form.
+Start update bug report form and POST.
 Start releases management pages: Create, Edit, Delete, Search and POST pages.
 Convert to MVC.
