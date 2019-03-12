@@ -31,9 +31,19 @@ form[name=add_employee_form] {
     overflow: scroll;
 }
 
+form[name=add_program_form] {
+    margin: auto;
+    width: 275px;
+    height: 225px;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    padding: 20px;
+    overflow: scroll;
+}
+
 form[name=add_functional_area_form] {
     margin: auto;
-    width: 250px;
+    width: 260px;
     height: 100px;
     border-radius: 5px;
     background-color: #F2F2F2;
