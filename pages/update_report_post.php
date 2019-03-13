@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>Bughound</title>
         <link rel="stylesheet" href="../assets/styles/nav_menu_style.css">
+        <link rel="stylesheet" href="../assets/styles/vertical_menu_style.css">
         <link rel="stylesheet" href="../assets/styles/form_style.css">
     </head>
     <body>
@@ -12,7 +13,10 @@
             $servername = "localhost";
             $username = "root";
             $password = "";
+            $conn = new mysqli($servername, $username, $password);
+            mysqli_select_db($conn, "bughound_db");
 
+            $report_id = $_GET['report_id'];
             $program_name = $_POST['program_name'];
             $report_type = $_POST['report_type'];
             $severity = $_POST['severity'];
@@ -36,25 +40,28 @@
             $date_resolved = $_POST['date_resolved'];
             $tested_by = $_POST['tested_by'];
             $date_tested = $_POST['date_tested'];
+            $treat_deferred = -1;
             if(isset($_POST['treat_deferred']) && $_POST['treat_deferred'] === "checked") {
                 $treat_deferred = 1;
             } else {
                 $treat_deferred = 0;
             }
+            /*
             if($_POST['attachments'] == "") {
                 $has_attachments = 0;
             } else {
                 $has_attachments = 1;
             }
+            */
             $comments = $_POST['comments'];
-
-            $conn = new mysqli($servername, $username, $password);
-            mysqli_select_db($conn, "bughound_db");
-            $query = "INSERT INTO bugs (program_name, report_type, severity, summary, reproducible, problem_description, suggested_fix, reported_by, date_discovered, functional_area_name, assigned_to, status, priority, resolution, resolution_version, resolved_by, date_resolved, tested_by, date_tested, treat_deferred, has_attachments, comments) VALUES ('".$program_name."','".$report_type."','".$severity."','".$summary."','".$reproducible."','".$problem_description."','".$suggested_fix."','".$reported_by."','".$date_discovered."','".$functional_area_name."','".$assigned_to."','".$status."','".$priority."','".$resolution."','".$resolution_version."','".$resolved_by."','".$date_resolved."','".$tested_by."','".$date_tested."','".$treat_deferred."','".$has_attachments."','".$comments."')";
+            
+            $query = "UPDATE bugs SET program_name = '".$program_name."', report_type = '".$report_type."', severity = '".$severity."', summary = '".$summary."', reproducible = '".$reproducible."', problem_description = '".$problem_description."', suggested_fix = '".$suggested_fix."', reported_by = '".$reported_by."', date_discovered = '".$date_discovered."', functional_area_name = '".$functional_area_name."', assigned_to = '".$assigned_to."', status = '".$status."', priority = '".$priority."', resolution = '".$resolution."', resolution_version = '".$resolution_version."', resolved_by = '".$resolved_by."', date_resolved = '".$date_resolved."', tested_by = '".$tested_by."', date_tested = '".$date_tested."', treat_deferred = '".$treat_deferred."' WHERE report_num = '".$report_id."'";
             //echo $query;
             mysqli_query($conn, $query);
-            header("Location: create_report.php");
+            $conn->close();
+            header("Location: index.php");
             exit;
+            
         ?>
     </body>
 </html>

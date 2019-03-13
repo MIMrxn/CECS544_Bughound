@@ -32,23 +32,28 @@
             </li>
         </ul>
 
-        <h2><center><font color="gray">Add a Functional Area Entry</font></center></h2>
+        <h2><center><font color="gray">Bughound Login</font></center></h2>
 
-        <form name="add_functional_area_form" action="add_functional_area_post.php" method="post" onsubmit="return validate(this)">
+        <form name="add_functional_area_form"  action="login_post.php" method="post" onsubmit="return validate(this)">
             <table>
-                <tr><td>Area Name:</td><td><input type="Text" name="area_name" /></td></tr>    
+                <tr><td>Username:</td><td><input type="Text" name="username" /></td></tr>    
+				<tr><td>Password:</td><td><input type="Password" name="password" /></td></tr> 
             </table>
             <input type="submit" name="submit" value="Submit" />
-            <input class="button" type="button" onclick="window.location.replace('add_functional_area.php')" value="Cancel" />
+            <input class="button" type="button" onclick="window.location.replace('login.php')" value="Cancel" />
         </form>
 
         <script language=Javascript>
             function validate(theform) {
-                if(theform.area_name.value === ""){
-                    alert ("Area Name field must contain characters");
+                if(theform.username.value === ""){
+                    alert ("Username field must contain characters");
                     return false;
                 }
-                return true;
+				if(theform.password.value === ""){
+                    alert ("Password field must contain characters");
+                    return false;
+                }	
+				return true;				
             }
         </script>
     </body>

@@ -32,7 +32,8 @@
                 <a href="javascript:void(0)" class="dropbtn">Bug Report</a>
                 <div class="dropdown-content">
                     <a href="create_report.php">Create</a>
-                    <a href="update_report.php">Update</a>
+                    <a href="search_reports.php?source=update">Update</a>
+                    <a href="search_reports.php?source=search">Search</a>
                 </div>
             </li>
             <li class="dropdown">
