@@ -7,7 +7,45 @@
         <link rel="stylesheet" href="../assets/styles/form_style.css">
     </head>
     <body>
-        <h3>
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Bug Report</a>
+                <div class="dropdown-content">
+                    <a href="create_report.php">Create</a>
+                    <a href="search_reports.php?source=update">Update</a>
+                    <a href="search_reports.php?source=search">Search</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn, active">Manage Database</a>
+                <div class="dropdown-content">
+                    <a href="manage_programs.php">Programs</a>
+                    <a href="manage_releases.php">Releases</a>
+                    <a href="manage_functional_areas.php">Functional Areas</a>
+                    <a href="manage_employees.php">Employees</a>
+                </div>
+            </li>
+            <li>
+                <a href="search.php">Search</a>
+            </li>
+        </ul>
+
+        <h2>
+            <center>
+                <?php
+                    $source = $_GET['source'];
+                    if($source == 'update') {
+                        echo '<font color="gray">Search for a Report to Update Entry</font>';
+                    }
+                    if($source == 'search') {
+                        echo '<font color="gray">Search for a Report Entry</font>';
+                    }
+                ?>
+            </center>
+        </h2>
+
+        <h2>
             <!-- ADD YOUR DB INFO HERE -->
             <?php
                 $servername = "localhost";
@@ -16,42 +54,17 @@
                 $conn = new mysqli($servername, $username, $password);
                 mysqli_select_db($conn, "bughound_db");
             ?>
-        </h3>
-        <ul>
-            <li><a href="index.php">Home</a></li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn, active">Bug Report</a>
-                <div class="dropdown-content">
-                    <a href="create_report.php">Create</a>
-                    <a href="search_reports.php?source=update">Update</a>
-                    <a href="search_reports.php?source=search">Search</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Manage Database</a>
-                <div class="dropdown-content">
-                    <a href="manage_programs.php">Programs</a>
-                    <a href="manage_functional_areas.php">Functional Areas</a>
-                    <a href="manage_employees.php">Employees</a>
-					<a href="manage_export.php">Exports</a>
-                </div>
-            </li>
-            <li>
-                <a href="search.php">Search</a>
-            </li>
-        </ul>
+        </h2>
 
-        <h2><font color="gray">New Bug Report Entry</font></h2>
-        
-        <form name="new_report_form" action="create_report_post.php" method="post" onsubmit="return validate(this)">
+        <form name="search_reports_form" action="search_reports_post.php?source=<?php echo $source; ?>" method="post" onsubmit="return validate(this)">
             <table>
                 <tr>
                     <td>Program:</td>
                     <td>
                         <select name="program_name">
                             <option value="default" selected>Select Program</option>
-							<!-- Get all program info from DB here -->
-							<?php
+                            <!-- Get all program info from DB here -->
+                            <?php
                                 $sql = "SELECT program_name FROM programs";
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
@@ -61,6 +74,8 @@
                             ?>
                         </select>
                     </td>
+                </tr>
+                <tr>
                     <td>Report Type:</td>
                     <td>
                         <select name="report_type">
@@ -73,6 +88,8 @@
                             <option value="query">Query</option>
                         </select>
                     </td>
+                </tr>
+                <tr>
                     <td>Severity:</td>
                     <td>
                         <select name="severity">
@@ -83,26 +100,6 @@
                         </select>
                     </td>
                 </tr>
-            </table>
-            <table>
-                <tr>
-                    <td>Problem Summary:</td>
-                    <td><input type="Text" name="summary" size="60"></td>
-                    <td>Reproducible?</td>
-                    <td><input type="checkbox" name="reproducible" value="checked"></td>
-                </tr>
-                <tr>
-                    <td>Problem Description:</td>
-                    <td>
-                        <textarea name="problem_description" rows="5" cols="50" placeholder="Explain why bug is a problem. Describe all steps and symptoms including error messages. Be careful to describe how to reproduce the problem. Even if you can’t reproduce it, describe all the steps taken to do so."></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Suggested Fix:</td>
-                    <td><textarea name="suggested_fix" rows="5" cols="50" placeholder="(OPTIONAL)"></textarea></td>
-                </tr>
-            </table>
-            <table>
                 <tr>
                     <td>Reported By:</td>
                     <td>
@@ -119,21 +116,18 @@
                             ?>
                         </select>
                     </td>
-                    <td>Date Discovered:</td>
+                </tr>     
+                <tr>
+                    <td>Date Bug Discovered:</td>
                     <td><input  type="date" name="date_discovered"></td>
                 </tr>
-            </table>
-
-            <hr>
-
-            <table>
                 <tr>
                     <td>Functional Area:</td>
                     <td>
                         <select name="functional_area_name">
                             <option value="default" selected>Select Area</option>
-							<!-- Get all program info from DB here -->
-							<?php
+                            <!-- Get all program info from DB here -->
+                            <?php
                                 $sql = "SELECT area_name FROM areas";
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
@@ -143,6 +137,8 @@
                             ?>
                         </select>
                     </td>
+                </tr>
+                <tr>
                     <td>Assigned To:</td>
                     <td>
                         <select name="assigned_to">
@@ -159,8 +155,6 @@
                         </select>
                     </td>
                 </tr>
-            </table>
-            <table>
                 <tr>
                     <td>Status:</td>
                     <td>
@@ -171,6 +165,8 @@
                             <option value="resolved">Resolved</option>
                         </select>
                     </td>
+                </tr>
+                <tr>
                     <td>Priority:</td>
                     <td>
                         <select name="priority">
@@ -183,6 +179,8 @@
                             <option value="6">6. Optional</option>
                         </select>
                     </td>
+                </tr>
+                <tr>
                     <td>Resolution:</td>
                     <td>
                         <select name="resolution">
@@ -198,11 +196,11 @@
                             <option value="duplicate">Duplicate</option>
                         </select>
                     </td>
+                </tr>
+                <tr>
                     <td>Resolution Version:</td>
                     <td><input type="Text" name="resolution_version" size="15"></td>
                 </tr>
-            </table>
-            <table>
                 <tr>
                     <td>Resolved By:</td>
                     <td>
@@ -219,8 +217,11 @@
                             ?>
                         </select>
                     </td>
+                </tr>
+                <tr>
                     <td>Date Resolved:</td>
                     <td><input  type="date" name="date_resolved"></td>
+                </tr>
                     <td>Tested By:</td>
                     <td>
                         <select name="tested_by">
@@ -236,106 +237,82 @@
                             ?>
                         </select>
                     </td>
+                <tr>
                     <td>Date Tested:</td>
                     <td><input  type="date" name="date_tested"></td>
-                    <td>Treat as deferred?</td>
-                    <td><input type="checkbox" name="treat_deferred" value="checked"></td>
+                <!-- 
                 </tr>
-            </table>
-            <?php
-                $conn->close();
-            ?>
-
-            <hr>
-
-            <table>
+                    <td>Treated as deferred?</td>
+                    <td><input type="checkbox" name="treat_deferred"></td>
                 <tr>
-                    <td>Additional Comments:</td>
-                    <td><textarea name="comments" rows="5" cols="50" placeholder="Add any extra information that may be relevant."></textarea></td>
-                </tr>
-                <tr>
-                    <td>Attachments:</td>
-                    <td><input type="file" name="attachments"></td>
-                </tr>
+                -->
             </table>
-
-            <input type="submit" name="submit_new_report" value="Submit">
-            <input class="button" type="button" onclick="window.location.replace('create_report.php')" value="Reset" />
+            <input type="submit" name="search_reports_submit" value="Search"/>
+            <input class="button" type="button" onclick="window.location.replace('search_reports.php?source=<?php echo $source; ?>')" value="Reset" />
             <input class="button" type="button" onclick="window.location.replace('index.php')" value="Cancel" />
         </form>
 
         <script language=Javascript>
             function validate(theform) {
-                if(theform.program_name.value === "default"){
-                    alert ("Program must be selected");
-                    return false;
+                var at_least_one_selected = true;
+                if(theform.program_name.value === "default") {
+                    at_least_one_selected = false;
                 }
-                if(theform.report_type.value === "default"){
-                    alert ("Report Type must be selected");
-                    return false;
+                if(theform.report_type.value != "default" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
                 }
-                if(theform.severity.value === "default"){
-                    alert ("Severity must be selected");
-                    return false;
+                if(theform.severity.value != "default" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
                 }
-                if(theform.summary.value === ""){
-                    alert ("Summary field must contain characters");
-                    return false;
+                if(theform.reported_by.value != "default" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
                 }
-                if(theform.problem_description.value === ""){
-                    alert ("Problem description must be filled");
-                    return false;
+                if(theform.date_discovered.value != "" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
                 }
-                if(theform.reported_by.value === "default"){
-                    alert ("Report By must be selected");
-                    return false;
+                if(theform.functional_area_name.value != "default" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
                 }
-                if(theform.date_discovered.value === ""){
-                    alert ("Date Discovered must be filled");
-                    return false;
+                if(theform.assigned_to.value != "default" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
                 }
-                if(theform.functional_area_name.value === "default"){
-                    alert ("Functional area must be selected");
-                    return false;
+                if(theform.status.value != "default" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
                 }
-                if(theform.assigned_to.value === "default"){
-                    alert ("Assigned To must be selected");
-                    return false;
+                if(theform.priority.value != "default" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
                 }
-                if(theform.status.value === "default"){
-                    alert ("Status must be selected");
-                    return false;
+                if(theform.resolution.value != "default" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
                 }
-                if(theform.priority.value === "default"){
-                    alert ("Priority must be selected");
-                    return false;
+                if(theform.resolution_version.value != "" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
                 }
-                if(theform.resolution.value === "default"){
-                    alert ("Resolution must be selected");
-                    return false;
+                if(theform.resolved_by.value != "default" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
                 }
-                if(theform.resolution_version.value === ""){
-                    alert ("Resolution version must be filled");
-                    return false;
+                if(theform.date_resolved.value != "" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
                 }
-                if(theform.resolved_by.value === "default"){
-                    alert ("Resolved By must be selected");
-                    return false;
+                if(theform.tested_by.value != "default" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
                 }
-                if(theform.date_resolved.value === ""){
-                    alert ("Date Resolved must be selected");
-                    return false;
+                if(theform.date_tested.value != "" && at_least_one_selected === false){
+                    at_least_one_selected = true;
                 }
-                if(theform.tested_by.value === "default"){
-                    alert ("Tested By must be selected");
-                    return false;
+                /*
+                if(isset(theform.treat_deferred) && theform.treat_deferred.value === 'True' && at_least_one_selected === false) {
+                    at_least_one_selected = true;
                 }
-                if(theform.date_tested.value === ""){
-                    alert ("Date Tested must be selected");
+                */
+
+                if(at_least_one_selected === true) {
+                    return true;
+                } else {
+                    alert ("At least one search term must be selected/filled in.");
                     return false;
                 }
 
-                return true;
             }
         </script>
     </body>
