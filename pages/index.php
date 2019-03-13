@@ -34,7 +34,8 @@
 
         <h2><center><font color="gray">Bughound Bug Tracking Software</font></center></h2>
 
-        <h1><center><font color="red">[BUGHOUND IMAGE(S)]</font></center></h1>
+        <!--<h1><center><font color="red">[BUGHOUND IMAGE(S)]</font></center></h1>-->
+		<center><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4tu9rcX0Uvi_eOogWxdmGv19emgAwjOzeMVADIo7qwo86BA_K" width="250" height="210" title="Bughound Logo"/></center>
 
         <p align="center">
             <b>About:</b> Bughound is a web-based bug recording and tracking software product
