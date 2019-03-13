@@ -39,9 +39,9 @@
                 <a href="javascript:void(0)" class="dropbtn, active">Manage Database</a>
                 <div class="dropdown-content">
                     <a href="manage_programs.php">Programs</a>
-                    <a href="manage_releases.php">Releases</a>
                     <a href="manage_functional_areas.php">Functional Areas</a>
                     <a href="manage_employees.php">Employees</a>
+					<a href="manage_export.php">Exports</a>
                 </div>
             </li>
             <li>
