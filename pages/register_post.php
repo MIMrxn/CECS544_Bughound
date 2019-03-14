@@ -25,6 +25,8 @@
                     $is_reporter = 0;
                 }
                 $user_level = 1; // default for initial registration
+				session_start();
+				$_SESSION['user_level'] = $user_level; // pass value to main page to verify if the user is a manager level
                 
                 $conn = new mysqli($servername, $username, $password);
                 mysqli_select_db($conn, "bughound_db");

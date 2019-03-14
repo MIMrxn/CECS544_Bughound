@@ -16,15 +16,23 @@
                     <a href="search_reports.php?source=search">Search</a>
                 </div>
             </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Manage Database</a>
-                <div class="dropdown-content">
-                    <a href="manage_programs.php">Programs</a>
-                    <a href="manage_functional_areas.php">Functional Areas</a>
-                    <a href="manage_employees.php">Employees</a>
-					<a href="manage_export.php">Exports</a>
-                </div>
-            </li>
+            <?php
+				// See if user that logged in is of manager level (user level of 5)
+				session_start();
+				$user_level = $_SESSION['user_level'];
+				
+				if($user_level == 5) {
+					echo '<li class="dropdown">
+					<a href="javascript:void(0)" class="dropbtn">Manage Database</a>
+					<div class="dropdown-content">
+						<a href="manage_programs.php">Programs</a>
+						<a href="manage_functional_areas.php">Functional Areas</a>
+						<a href="manage_employees.php">Employees</a>
+						<a href="manage_export.php">Exports</a>
+					</div>
+					</li>';
+				}
+			?>
             <li>
                 <a class="active" href="search.php">Search</a>
             </li>

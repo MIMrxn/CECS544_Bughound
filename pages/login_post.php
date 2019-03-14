@@ -24,6 +24,10 @@
 					$rowcount=mysqli_num_rows($result);
 
 					if($rowcount > 0) {
+						$result_array = mysqli_fetch_array($result);
+						$user_level = $result_array['user_level'];
+						session_start();
+						$_SESSION['user_level'] = $user_level; // pass value to main page to verify if the user is a manager level
 						header("Location: index.php");
 					}
 					else {
@@ -31,7 +35,7 @@
 					}
 					  
 					// Free result set
-					mysqli_free_result($result);
+					//mysqli_free_result($result);
 				}
 
 				mysqli_close($con);
