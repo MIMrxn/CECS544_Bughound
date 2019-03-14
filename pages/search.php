@@ -33,9 +33,7 @@
 					</li>';
 				}
 			?>
-            <li>
-                <a class="active" href="search.php">Search</a>
-            </li>
+            <li style="float:right"><a class="active" href="search.php">Search</a></li>
         </ul>
 
         <h2><center><font color="gray">Bughound Bug Tracking Software</font></center></h2>

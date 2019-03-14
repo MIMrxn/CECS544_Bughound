@@ -32,29 +32,47 @@
             $user_level = $row[8];
             
             $conn->close();
+
+            session_start();
+            if(isset($_SESSION['user_name']) && isset($_SESSION['user_level'])) {
+                $user_level = $_SESSION['user_level'];
+                $user_name = $_SESSION['user_name'];
+            }
         ?>
         <ul>
             <li><a href="index.php">Home</a></li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Bug Report</a>
+                <a href="javascript:void(0)" class="dropbtn, active">Bug Report</a>
                 <div class="dropdown-content">
                     <a href="create_report.php">Create</a>
-                    <a href="search_reports.php?source=update">Update</a>
+                    <?php
+                        // See if user that logged in is of manager level (user level of 5)
+                        session_start();
+                        $user_level = $_SESSION['user_level'];
+                        
+                        if($user_level == 5) {
+                            echo '<a href="search_reports.php?source=update">Update</a>';
+                        }
+                    ?>
                     <a href="search_reports.php?source=search">Search</a>
                 </div>
             </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn, active">Manage Database</a>
-                <div class="dropdown-content">
-                    <a href="manage_programs.php">Programs</a>
-                    <a href="manage_functional_areas.php">Functional Areas</a>
-                    <a href="manage_employees.php">Employees</a>
-					<a href="manage_export.php">Exports</a>
-                </div>
-            </li>
-            <li>
-                <a href="search.php">Search</a>
-            </li>
+            <?php
+                // See if user that logged in is of manager level (user level of 5)
+                $user_level = $_SESSION['user_level'];
+                
+                if($user_level == 5) {
+                    echo '<li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Manage Database</a>
+                    <div class="dropdown-content">
+                        <a href="manage_programs.php">Programs</a>
+                        <a href="manage_functional_areas.php">Functional Areas</a>
+                        <a href="manage_employees.php">Employees</a>
+                        <a href="manage_export.php">Exports</a>
+                    </div>
+                    </li>';
+                }
+            ?>
         </ul>
 
         <h2><center><font color="gray">Edit an Employee Entry</font></center></h2>

@@ -10,17 +10,7 @@
     <body>
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Bug Report</a>
-                <div class="dropdown-content">
-                    <a href="create_report.php">Create</a>
-                    <a href="search_reports.php?source=update">Update</a>
-                    <a href="search_reports.php?source=search">Search</a>
-                </div>
-            </li>
-            <li>
-                <a href="search.php">Search</a>
-            </li>
+            <li style="float:right"><a href="login.php">Login</a></li>
         </ul>
 
         <h2><center><font color="gray">Bughound Login</font></center></h2>

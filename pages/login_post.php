@@ -28,6 +28,9 @@
 						$user_level = $result_array['user_level'];
 						session_start();
 						$_SESSION['user_level'] = $user_level; // pass value to main page to verify if the user is a manager level
+						$_SESSION['user_name'] = $result_array['user_name'];
+						echo $_SESSION['user_level'];
+						echo $_SESSION['user_name'];
 						header("Location: index.php");
 					}
 					else {
