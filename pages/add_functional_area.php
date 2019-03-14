@@ -53,7 +53,7 @@
                 <tr><td>Area Name:</td><td><input type="Text" name="area_name" /></td></tr>    
             </table>
             <input type="submit" name="submit" value="Submit" />
-            <input class="button" type="button" onclick="window.location.replace('add_functional_area.php')" value="Cancel" />
+            <input class="button" type="button" onclick="window.location.replace('index.php')" value="Cancel" />
         </form>
 
         <script language=Javascript>

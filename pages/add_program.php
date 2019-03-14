@@ -56,7 +56,7 @@
                 <tr><td>Program Release Date:</td><td><input type="Date" name="program_release_date" /></td></tr>     
             </table>
             <input type="submit" name="submit" value="Submit" />
-            <input class="button" type="button" onclick="window.location.replace('add_program.php')" value="Cancel" />
+            <input class="button" type="button" onclick="window.location.replace('index.php')" value="Cancel" />
         </form>
 
         <script language=Javascript>
