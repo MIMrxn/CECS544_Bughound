@@ -57,7 +57,7 @@
                 <tr><td>User Level:</td><td><input type="Number" name="user_level" /></td></tr>      
             </table>
             <input type="submit" name="submit" value="Submit" />
-            <input class="button" type="button" onclick="window.location.replace('add_employee.php')" value="Cancel" />
+            <input class="button" type="button" onclick="window.location.replace('index.php')" value="Cancel" />
         </form>
 
         <script language=Javascript>
