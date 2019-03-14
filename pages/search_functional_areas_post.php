@@ -42,7 +42,6 @@
 
         <h2>
             <?php
-                $search_functional_areas_input = $_POST['search_functional_areas_input'];
                 $sql = "";
                 
                 $source = $_GET['source'];
@@ -58,9 +57,7 @@
 
                 $area_name = $_POST['area_name'];
 
-                if($search_functional_areas_input == 'Search by Area Name') {
-                    $sql = " SELECT * FROM areas WHERE area_name = '".$area_name."' ";
-                }
+                $sql = " SELECT * FROM areas WHERE area_name = '".$area_name."' ";
 
                 $none = 0;
                 $result = $conn->query($sql);

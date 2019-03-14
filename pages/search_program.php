@@ -52,43 +52,45 @@
             <table>
                 <tr>
                     <td>Program Name:</td><td><input type="Text" name="program_name" /></td>
-                    <td><input type="submit" name="search_prog_input" value="Search by Program Name" /></td>
                 </tr>
                 <tr>
                     <td>Program Version:</td><td><input type="Number" name="program_version" /></td>
-                    <td><input type="submit" name="search_prog_input" value="Search by Program Version" /></td>
                 </tr>
                 <tr>
                     <td>Program Release:</td><td><input type="Number" name="program_release" /></td>
-                    <td><input type="submit" name="search_prog_input" value="Search by Program Release" /></td>
                 </tr>
                 <tr>
                     <td>Program Release Date:</td><td><input type="Date" name="program_release_date" /></td>
-                    <td><input type="submit" name="search_prog_input" value="Search by Program Release Date" /></td>
                 </tr>     
             </table>
-            <input class="button" type="button" onclick="window.location.replace('search_program.php?source=<?php echo $source; ?>')" value="Cancel" />
+
+            <input type="submit" name="search_reports_submit" value="Search"/>
+            <input class="button" type="button" onclick="window.location.replace('search_program.php?source=<?php echo $source; ?>')" value="Reset" />
+            <input class="button" type="button" onclick="window.location.replace('index.php')" value="Cancel" />
         </form>
 
         <script language=Javascript>
             function validate(theform) {
-                if(theform.program_name.value === "" && theform.search_emps_input === "Search by Program Name") {
-                    alert ("Program Name field must contain characters");
+                var at_least_one_selected = true;
+                if(theform.program_name.value === "") {
+                    at_least_one_selected = false;
+                }
+                if(theform.program_version.value != "" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
+                }
+                if(theform.program_release.value != "" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
+                }
+                if(theform.program_release_date.value != "" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
+                }
+                
+                if(at_least_one_selected === true) {
+                    return true;
+                } else {
+                    alert ("At least one search term must be selected/filled in.");
                     return false;
                 }
-                if(theform.program_version.value === "" && theform.search_emps_input === "Search by Program Version") {
-                    alert ("Program Version field must contain characters");
-                    return false;
-                }
-                if(theform.program_release.value === "" && theform.search_emps_input === "Search by Program Release") {
-                    alert ("Program Release field must contain characters");
-                    return false;
-                }
-                if(theform.program_release_date.value === "" && theform.search_emps_input === "Search by Program Release Date") {
-                    alert ("Program Release Date field must contain characters");
-                    return false;
-                }
-                return true;
             }
         </script>
     </body>

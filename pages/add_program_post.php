@@ -22,7 +22,7 @@
 				
                 $query = "INSERT INTO programs (program_name, program_version, program_release, program_release_date) VALUES ('".$program_name."','".$program_version."','".$program_release."','".$program_release_date."')";
 				
-                echo $query;
+                //echo $query;
                 mysqli_query($conn, $query);
                 header("Location: add_program.php");
                 exit;
