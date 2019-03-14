@@ -22,7 +22,7 @@ CREATE TABLE programs (
 	program_version INT NOT NULL,
 	program_release INT NOT NULL,
 	program_release_date DATE NOT NULL,
-	PRIMARY KEY(program_name, program_version, program_release) 
+	PRIMARY KEY(program_name, program_version, program_release)
 );
 
 CREATE TABLE areas (
@@ -39,7 +39,7 @@ CREATE TABLE attachments (
 );
 
 CREATE TABLE bugs (
-	report_num INT NOT NULL UNIQUE AUTO_INCREMENT,
+	report_id INT NOT NULL UNIQUE AUTO_INCREMENT,
 	program_name varchar(255) NOT NULL,
 	report_type varchar(255) NOT NULL,
 	severity INT NOT NULL,
@@ -62,12 +62,6 @@ CREATE TABLE bugs (
 	tested_by INT NOT NULL,
 	date_tested DATE NOT NULL,
 	treat_deferred BOOLEAN NOT NULL,
-	PRIMARY KEY (report_num),
-	CONSTRAINT bugs_fk1 FOREIGN KEY(program_name) REFERENCES programs(program_name),
-	CONSTRAINT bugs_fk2 FOREIGN KEY(functional_area_name) REFERENCES areas(area_name),
-	CONSTRAINT bugs_fk3 FOREIGN KEY(reported_by) REFERENCES employees(employee_id),
-	CONSTRAINT bugs_fk4 FOREIGN KEY(assigned_to) REFERENCES employees(employee_id),
-	CONSTRAINT bugs_fk5 FOREIGN KEY(resolved_by) REFERENCES employees(employee_id),
-	CONSTRAINT bugs_fk6 FOREIGN KEY(tested_by) REFERENCES employees(employee_id)
+	PRIMARY KEY (report_id)
 );
 

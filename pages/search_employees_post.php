@@ -42,9 +42,8 @@
 
         <h2>
             <?php
-                $search_emps_input = $_POST['search_emps_input'];
                 $sql = "";
-                
+
                 $source = $_GET['source'];
                 if($source == 'edit') {
                     echo "<h2>Results for Employees to Edit\n</h2><h3>Click on employee ID number to edit.</h3>";
@@ -69,20 +68,47 @@
                 }
                 $user_level = $_POST['user_level'];
 
-                if($search_emps_input == 'Search by First Name') {
-                    $sql = " SELECT * FROM employees WHERE first_name = '".$first_name."' ";
-                } else if($search_emps_input == 'Search by Last Name') {
-                    $sql = " SELECT * FROM employees WHERE last_name = '".$last_name."' ";
-                } else if($search_emps_input == 'Search by Username') {
-                    $sql = " SELECT * FROM employees WHERE user_name = '".$user_name."' ";
-                } else if($search_emps_input == 'Search by Position') {
-                    $sql = " SELECT * FROM employees WHERE position = '".$position."' ";
-                } else if($search_emps_input == 'Search by Group Number') {
-                    $sql = " SELECT * FROM employees WHERE group_num = '".$group_num."' ";
-                } else if($search_emps_input == 'Search by Is a Reporter') {
-                    $sql = " SELECT * FROM employees WHERE is_reporter = '".$is_reporter."' ";
-                } else if($search_emps_input == 'Search by User Level') {
-                    $sql = " SELECT * FROM employees WHERE user_level = '".$user_level."' ";
+                $previous_selection_exists = false;
+                $sql = "SELECT * FROM employees WHERE ";
+                if($first_name != "") {
+                    $sql .= " first_name = '".$first_name."' ";
+                    $previous_selection_exists = true;
+                }
+                if($last_name != "" && $previous_selection_exists === true) {
+                    $sql .= " AND last_name = '".$last_name."' ";
+                } else if($last_name != "" && $previous_selection_exists === false) {
+                    $sql .= " last_name = '".$last_name."' ";
+                    $previous_selection_exists = true;
+                }
+                if($user_name != "" && $previous_selection_exists === true) {
+                    $sql .= " AND user_name = '".$user_name."' ";
+                } else if($user_name != "" && $previous_selection_exists === false) {
+                    $sql .= " user_name = '".$user_name."' ";
+                    $previous_selection_exists = true;
+                }
+                if($position != "" && $previous_selection_exists === true) {
+                    $sql .= " AND position = '".$position."' ";
+                } else if($position != "" && $previous_selection_exists === false) {
+                    $sql .= " position = '".$position."' ";
+                    $previous_selection_exists = true;
+                }
+                if($group_num != "" && $previous_selection_exists === true) {
+                    $sql .= " AND group_num = '".$group_num."' ";
+                } else if($group_num != "" && $previous_selection_exists === false) {
+                    $sql .= " group_num = '".$group_num."' ";
+                    $previous_selection_exists = true;
+                }
+                if($is_reporter != "" && $previous_selection_exists === true) {
+                    $sql .= " AND is_reporter = '".$is_reporter."' ";
+                } else if($is_reporter != "" && $previous_selection_exists === false) {
+                    $sql .= " is_reporter = '".$is_reporter."' ";
+                    $previous_selection_exists = true;
+                }
+                if($user_level != "" && $previous_selection_exists === true) {
+                    $sql .= " AND user_level = '".$user_level."' ";
+                } else if($user_level != "" && $previous_selection_exists === false) {
+                    $sql .= " user_level = '".$user_level."' ";
+                    $previous_selection_exists = true;
                 }
 
                 $none = 0;

@@ -16,7 +16,7 @@
 
             $report_id = $_GET['report_id'];
 
-            $sql = "SELECT * FROM bugs WHERE report_num = $report_id";
+            $sql = "SELECT * FROM bugs WHERE report_id = $report_id";
 
             $result = $conn->query($sql);
             $row = mysqli_fetch_row($result);

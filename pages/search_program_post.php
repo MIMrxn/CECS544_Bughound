@@ -42,9 +42,11 @@
 
         <h2>
             <?php
+                /*
                 $search_prog_input = $_POST['search_prog_input'];
                 $sql = "";
-                
+                */
+
                 $source = $_GET['source'];
                 if($source == 'edit') {
                     echo "<h2>Results for Program Information to Edit\n</h2><h3>Click on a Program Name to edit.</h3>";
@@ -61,14 +63,31 @@
                 $program_release = $_POST['program_release'];
                 $program_release_date = $_POST['program_release_date'];
 
-                if($search_prog_input == 'Search by Program Name') {
-                    $sql = " SELECT * FROM programs WHERE program_name = '".$program_name."' ";
-                } else if($search_prog_input == 'Search by Program Version') {
-                    $sql = " SELECT * FROM programs WHERE program_version = '".$program_version."' ";
-                } else if($search_prog_input == 'Search by Program Release') {
-                    $sql = " SELECT * FROM programs WHERE program_release = '".$program_release."' ";
-                } else if($search_prog_input == 'Search by Program Release Date') {
-                    $sql = " SELECT * FROM programs WHERE program_release_date = '".$program_release_date."' ";
+                //  NEW CODE
+                $previous_selection_exists = false;
+                $sql = "SELECT * FROM programs WHERE ";
+
+                if($program_name != "") {
+                    $sql .= " program_name = '".$program_name."' ";
+                    $previous_selection_exists = true;
+                }
+                if($program_version != "" && $previous_selection_exists === true) {
+                    $sql .= " AND program_version = '".$program_version."' ";
+                } else if($program_version != "" && $previous_selection_exists === false) {
+                    $sql .= " program_version = '".$program_version."' ";
+                    $previous_selection_exists = true;
+                }
+                if($program_release != "" && $previous_selection_exists === true) {
+                    $sql .= " AND program_release = '".$program_release."' ";
+                } else if($program_release != "" && $previous_selection_exists === false) {
+                    $sql .= " program_release = '".$program_release."' ";
+                    $previous_selection_exists = true;
+                }
+                if($program_release_date != "" && $previous_selection_exists === true) {
+                    $sql .= " AND program_release_date = '".$program_release_date."' ";
+                } else if($program_release_date != "" && $previous_selection_exists === false) {
+                    $sql .= " program_release_date = '".$program_release_date."' ";
+                    $previous_selection_exists = true;
                 }
 
                 $none = 0;
@@ -81,7 +100,7 @@
                         printf("<tr><td><a href='edit_program.php?program_name=%s'>%s</a></td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0], $row[0], $row[1],$row[2],$row[3]);
                     }
                     if($source == 'delete') {
-                        printf("<tr><td><a onclick='return confirm_delete(%s);' href='delete_program.php?program_name=%s'>%s</a></td><td>%d</td><td>%d</td><td>%s</td></tr>\n",$row[0],$row[0],$row[0],$row[1],$row[2],$row[3]);
+                        printf("<tr><td><a onclick='return confirm_delete();' href='delete_program.php?program_name=%s'>%s</a></td><td>%d</td><td>%d</td><td>%s</td></tr>\n",$row[0],$row[0],$row[1],$row[2],$row[3]);
                     }
                     if($source == 'search') {
                         printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[1],$row[2],$row[3]);
@@ -98,9 +117,8 @@
         </h2>
 
         <script type="text/javascript">
-            function confirm_delete(program_name) {
-                var str = "Are you sure you want to delete the program ".concat(program_name, "?");
-                return confirm(str);
+            function confirm_delete() {
+                return confirm("Are you sure you want to delete entry?");
             }
         </script>
     </body>

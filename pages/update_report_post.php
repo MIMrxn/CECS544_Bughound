@@ -55,7 +55,7 @@
             */
             $comments = $_POST['comments'];
             
-            $query = "UPDATE bugs SET program_name = '".$program_name."', report_type = '".$report_type."', severity = '".$severity."', summary = '".$summary."', reproducible = '".$reproducible."', problem_description = '".$problem_description."', suggested_fix = '".$suggested_fix."', reported_by = '".$reported_by."', date_discovered = '".$date_discovered."', functional_area_name = '".$functional_area_name."', assigned_to = '".$assigned_to."', status = '".$status."', priority = '".$priority."', resolution = '".$resolution."', resolution_version = '".$resolution_version."', resolved_by = '".$resolved_by."', date_resolved = '".$date_resolved."', tested_by = '".$tested_by."', date_tested = '".$date_tested."', treat_deferred = '".$treat_deferred."' WHERE report_num = '".$report_id."'";
+            $query = "UPDATE bugs SET program_name = '".$program_name."', report_type = '".$report_type."', severity = '".$severity."', summary = '".$summary."', reproducible = '".$reproducible."', problem_description = '".$problem_description."', suggested_fix = '".$suggested_fix."', reported_by = '".$reported_by."', date_discovered = '".$date_discovered."', functional_area_name = '".$functional_area_name."', assigned_to = '".$assigned_to."', status = '".$status."', priority = '".$priority."', resolution = '".$resolution."', resolution_version = '".$resolution_version."', resolved_by = '".$resolved_by."', date_resolved = '".$date_resolved."', tested_by = '".$tested_by."', date_tested = '".$date_tested."', treat_deferred = '".$treat_deferred."' WHERE report_id = '".$report_id."'";
             //echo $query;
             mysqli_query($conn, $query);
             $conn->close();

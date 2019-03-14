@@ -52,10 +52,12 @@
             <table>
                 <tr>
                     <td>Area Name:</td><td><input type="Text" name="area_name" /></td>
-                    <td><input type="submit" name="search_functional_areas_input" value="Search by Area Name" /></td>
                 </tr>  
             </table>
-            <input class="button" type="button" onclick="window.location.replace('search_functional_areas.php?source=<?php echo $source; ?>')" value="Cancel" />
+
+            <input type="submit" name="search_reports_submit" value="Search"/>
+            <input class="button" type="button" onclick="window.location.replace('search_functional_areas.php?source=<?php echo $source; ?>')" value="Reset" />
+            <input class="button" type="button" onclick="window.location.replace('index.php')" value="Cancel" />
         </form>
 
         <script language=Javascript>
