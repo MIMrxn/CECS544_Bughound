@@ -1,7 +1,14 @@
 TODO:
 
-Finish POST feedback dialogue.
-	Feedback after editing and deleting.
-
-Start update bug report form and POST.
-Convert to MVC.
+- Database revisions
+	- Make program NOT unique
+	- Add a column "functional area" to program table
+	
+- Bughound revisions
+	- Area page must have dropdown of programs 
+	- Search for all reports defaults to searching for OPEN bugs
+	- Deleting programs/employees/areas shouldn't delete them from the database, only from searching for bug reports (dropdowns)
+	- Export tables separately 
+		- In ASCII text
+		- In XML
+	
