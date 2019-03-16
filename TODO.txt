@@ -1,9 +1,5 @@
 TODO:
 
-- Database revisions
-	- Make program NOT unique
-	- Add a column "functional area" to program table
-	
 - Bughound revisions
 	- Area page must have dropdown of programs 
 	- Search for all reports defaults to searching for OPEN bugs
@@ -11,4 +7,17 @@ TODO:
 	- Export tables separately 
 		- In ASCII text
 		- In XML
-	
+
+- RESOLVED
+	- Database revisions
+		- Make program NOT unique
+		- Link functional areas to programs
+		- Add visible boolean to tables
+	- Bughound revisions
+		- Programs now allows for non unique insertion
+
+- Currently working on
+	M:
+		- Bughound revisions
+			- Program drop down selection in areas
+			- Searches and dropdowns for all programs/areas/employees/reports with the new DB
