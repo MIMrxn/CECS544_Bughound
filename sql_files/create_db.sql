@@ -27,8 +27,8 @@ CREATE TABLE employees (
 CREATE TABLE programs (
 	program_id INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
 	program_name varchar(255) NOT NULL,
-	program_version INT UNSIGNED NOT NULL,
 	program_release INT UNSIGNED NOT NULL,
+	program_version INT UNSIGNED NOT NULL,
 	program_release_date DATE NOT NULL,
 	is_visible INT NOT NULL DEFAULT 1,
 	PRIMARY KEY(program_id) 

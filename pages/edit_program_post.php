@@ -16,13 +16,13 @@
             $conn = new mysqli($servername, $username, $password);
             mysqli_select_db($conn, "bughound_db");
 
+            $program_id = $_GET['program_id'];
             $program_name = $_POST['program_name'];
-            $program_version = $_POST['program_version'];
             $program_release = $_POST['program_release'];
+            $program_version = $_POST['program_version'];
             $program_release_date = $_POST['program_release_date'];
             
-            $query = "UPDATE programs SET program_name = '".$program_name."', program_version = '".$program_version."', 
-			program_release = '".$program_release."', program_release_date = '".$program_release_date."' WHERE program_name = '".$program_name."'";
+            $query = "UPDATE programs SET program_name = '".$program_name."', program_release = '".$program_release."', program_version = '".$program_version."', program_release_date = '".$program_release_date."' WHERE program_id = '".$program_id."'";
             echo $query;
             mysqli_query($conn, $query);
             $conn->close();

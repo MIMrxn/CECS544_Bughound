@@ -71,8 +71,8 @@
                 }
 
                 $program_name = $_POST['program_name'];
-                $program_version = $_POST['program_version'];
                 $program_release = $_POST['program_release'];
+                $program_version = $_POST['program_version'];
                 $program_release_date = $_POST['program_release_date'];
 
                 //  NEW CODE
@@ -83,16 +83,16 @@
                     $sql .= " program_name = '".$program_name."' ";
                     $previous_selection_exists = true;
                 }
-                if($program_version != "" && $previous_selection_exists === true) {
-                    $sql .= " AND program_version = '".$program_version."' ";
-                } else if($program_version != "" && $previous_selection_exists === false) {
-                    $sql .= " program_version = '".$program_version."' ";
-                    $previous_selection_exists = true;
-                }
                 if($program_release != "" && $previous_selection_exists === true) {
                     $sql .= " AND program_release = '".$program_release."' ";
                 } else if($program_release != "" && $previous_selection_exists === false) {
                     $sql .= " program_release = '".$program_release."' ";
+                    $previous_selection_exists = true;
+                }
+                if($program_version != "" && $previous_selection_exists === true) {
+                    $sql .= " AND program_version = '".$program_version."' ";
+                } else if($program_version != "" && $previous_selection_exists === false) {
+                    $sql .= " program_version = '".$program_version."' ";
                     $previous_selection_exists = true;
                 }
                 if($program_release_date != "" && $previous_selection_exists === true) {
@@ -101,21 +101,22 @@
                     $sql .= " program_release_date = '".$program_release_date."' ";
                     $previous_selection_exists = true;
                 }
+                $sql .= "AND is_visible = 1";
 
                 $none = 0;
                 $result = $conn->query($sql);
 
-                echo "<table border=1><th>Program Name</th><th>Program Version</th><th>Program Release </th><th>Program Release Date</th>\n";
+                echo "<table border=1><th>Program ID</th><th>Program Name</th><th>Program Release</th><th>Program Version</th><th>Program Release Date</th>\n";
                 while($row=mysqli_fetch_row($result)) {
                     $none=1;
                     if($source == 'edit') {
-                        printf("<tr><td><a href='edit_program.php?program_name=%s'>%s</a></td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0], $row[0], $row[1],$row[2],$row[3]);
+                        printf("<tr><td><a href='edit_program.php?program_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n", $row[0], $row[0], $row[1], $row[2], $row[3], $row[4]);
                     }
                     if($source == 'delete') {
-                        printf("<tr><td><a onclick='return confirm_delete();' href='delete_program.php?program_name=%s'>%s</a></td><td>%d</td><td>%d</td><td>%s</td></tr>\n",$row[0],$row[0],$row[1],$row[2],$row[3]);
+                        printf("<tr><td><a onclick='return confirm_delete();' href='delete_program.php?program_id=%d'>%d</a></td><td>%s</td><td>%d</td><td>%d</td><td>%s</td></tr>\n",$row[0],$row[0],$row[1],$row[2],$row[3],$row[4]);
                     }
                     if($source == 'search') {
-                        printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[1],$row[2],$row[3]);
+                        printf("<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[1],$row[2],$row[3],$row[4]);
                     }
                 }
                 echo "</table>";

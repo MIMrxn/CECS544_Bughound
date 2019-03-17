@@ -16,9 +16,9 @@
             $conn = new mysqli($servername, $username, $password);
             mysqli_select_db($conn, "bughound_db");
 
-            $program_name = $_GET['program_name'];
+            $program_id = $_GET['program_id'];
             
-            $query = "DELETE FROM programs WHERE program_name = '".$program_name."'";
+            $query = " UPDATE programs SET is_visible = 0 WHERE program_id = '".$program_id."' ";
             //echo $query;
 
             mysqli_query($conn, $query);

@@ -51,8 +51,8 @@
         <form name="add_employee_form" action="add_program_post.php" method="post" onsubmit="return validate(this)">
             <table>
                 <tr><td>Program Name:</td><td><input type="Text" name="program_name" /></td></tr>
-                <tr><td>Program Version:</td><td><input type="Number" name="program_version" /></td></tr>
                 <tr><td>Program Release:</td><td><input type="Number" name="program_release" /></td></tr>
+                <tr><td>Program Version:</td><td><input type="Number" name="program_version" /></td></tr>
                 <tr><td>Program Release Date:</td><td><input type="Date" name="program_release_date" /></td></tr>     
             </table>
             <input type="submit" name="submit" value="Submit" />
@@ -65,12 +65,12 @@
                     alert ("Program name field must contain characters");
                     return false;
                 }
-                if(theform.program_version.value.trim() === ""){
-                    alert ("Program version field must contain characters");
-                    return false;
-                }
                 if(theform.program_release.value.trim() === ""){
                     alert ("Program release field must contain characters");
+                    return false;
+                }
+                if(theform.program_version.value.trim() === ""){
+                    alert ("Program version field must contain characters");
                     return false;
                 }
                 if(theform.program_release_date.value === ""){

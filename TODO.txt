@@ -6,8 +6,6 @@ TODO:
 	- Export tables separately 
 		- In ASCII text
 		- In XML
-	- Programs
-		- Add support for new DB to all management functions (add, edit, delete, search)
 	- Employees
 		- Add support for new DB to all management functions (add, edit, delete, search)
 	- Reports
@@ -21,6 +19,7 @@ TODO:
 	- Bughound revisions
 		- Programs
 			- Programs now allows for non unique insertion
+			- Add support for new DB to all management functions (add, edit, delete, search)
 		- Areas
 			- Support to add areas to a program
 			- Management functions (add, edit, delete, search) now supported in new DB.
@@ -28,5 +27,6 @@ TODO:
 - Currently working on
 	M:
 		- Bughound revisions
-			- Programs
+			- Employees
 				- Add support for new DB to all management functions (add, edit, delete, search)
+				
