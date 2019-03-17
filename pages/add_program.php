@@ -61,15 +61,15 @@
 
         <script language=Javascript>
             function validate(theform) {
-                if(theform.program_name.value === ""){
+                if(theform.program_name.value.trim() === ""){
                     alert ("Program name field must contain characters");
                     return false;
                 }
-                if(theform.program_version.value === ""){
+                if(theform.program_version.value.trim() === ""){
                     alert ("Program version field must contain characters");
                     return false;
                 }
-                if(theform.program_release.value === ""){
+                if(theform.program_release.value.trim() === ""){
                     alert ("Program release field must contain characters");
                     return false;
                 }

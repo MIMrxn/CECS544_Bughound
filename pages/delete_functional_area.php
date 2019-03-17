@@ -18,7 +18,7 @@
 
             $area_id = $_GET['area_id'];
             
-            $query = "DELETE FROM areas WHERE area_id = '".$area_id."'";
+            $query = " UPDATE areas SET is_visible = 0 WHERE area_id = '".$area_id."' ";
             echo $query;
             mysqli_query($conn, $query);
             $conn->close();

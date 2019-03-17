@@ -63,8 +63,8 @@
                     <td>
                         <select name="program_name">
                             <option value="default" selected>Select Program</option>
-							<!-- Get all program info from DB here -->
-							<?php
+                            <!-- Get all program info from DB here -->
+                            <?php
                                 $sql = "SELECT program_name FROM programs";
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
@@ -145,8 +145,8 @@
                     <td>
                         <select name="functional_area_name">
                             <option value="default" selected>Select Area</option>
-							<!-- Get all program info from DB here -->
-							<?php
+                            <!-- Get all program info from DB here -->
+                            <?php
                                 $sql = "SELECT area_name FROM areas";
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
@@ -291,11 +291,11 @@
                     alert ("Severity must be selected");
                     return false;
                 }
-                if(theform.summary.value === ""){
+                if(theform.summary.value.trim() === ""){
                     alert ("Summary field must contain characters");
                     return false;
                 }
-                if(theform.problem_description.value === ""){
+                if(theform.problem_description.value.trim() === ""){
                     alert ("Problem description must be filled");
                     return false;
                 }
@@ -307,6 +307,7 @@
                     alert ("Date Discovered must be filled");
                     return false;
                 }
+                /*
                 if(theform.functional_area_name.value === "default"){
                     alert ("Functional area must be selected");
                     return false;
@@ -327,7 +328,7 @@
                     alert ("Resolution must be selected");
                     return false;
                 }
-                if(theform.resolution_version.value === ""){
+                if(theform.resolution_version.value.trim() === ""){
                     alert ("Resolution version must be filled");
                     return false;
                 }
@@ -347,7 +348,8 @@
                     alert ("Date Tested must be selected");
                     return false;
                 }
-
+                */
+                
                 return true;
             }
         </script>

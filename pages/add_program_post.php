@@ -24,7 +24,7 @@
 				
                 //echo $query;
                 mysqli_query($conn, $query);
-                header("Location: add_program.php");
+                header("Location: index.php");
                 exit;
             ?>
         </h2>

@@ -1,12 +1,17 @@
 TODO:
 
 - Bughound revisions
-	- Area page must have dropdown of programs 
 	- Search for all reports defaults to searching for OPEN bugs
 	- Deleting programs/employees/areas shouldn't delete them from the database, only from searching for bug reports (dropdowns)
 	- Export tables separately 
 		- In ASCII text
 		- In XML
+	- Programs
+		- Add support for new DB to all management functions (add, edit, delete, search)
+	- Employees
+		- Add support for new DB to all management functions (add, edit, delete, search)
+	- Reports
+		- Add support for new DB to all management functions (add, edit, search)
 
 - RESOLVED
 	- Database revisions
@@ -14,10 +19,14 @@ TODO:
 		- Link functional areas to programs
 		- Add visible boolean to tables
 	- Bughound revisions
-		- Programs now allows for non unique insertion
+		- Programs
+			- Programs now allows for non unique insertion
+		- Areas
+			- Support to add areas to a program
+			- Management functions (add, edit, delete, search) now supported in new DB.
 
 - Currently working on
 	M:
 		- Bughound revisions
-			- Program drop down selection in areas
-			- Searches and dropdowns for all programs/areas/employees/reports with the new DB
+			- Programs
+				- Add support for new DB to all management functions (add, edit, delete, search)

@@ -48,11 +48,33 @@
         <h2><center><font color="gray">Functional Area Management Options</font></center></h2>
 
         <div class="vertical-menu">
-            <a href="add_functional_area.php">Add a new functional area</a>
+            <a href="add_functional_area.php" onclick="return check_programs_exist();">Add a new functional area</a>
             <a href="search_functional_areas.php?source=edit">Edit a functional area's information</a>
             <a href="search_functional_areas.php?source=delete">Delete a functional area</a>
-            <a href="search_functional_areas.php?source=search">Search for a functional area</a>         
+            <a href="search_functional_areas.php?source=search">Search for a functional area</a>  
         </div>
 
+        <script language=Javascript>
+            function check_programs_exist() {
+                <?php
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $conn = new mysqli($servername, $username, $password);
+                    mysqli_select_db($conn, "bughound_db");
+
+                    $sql = "SELECT * FROM programs";
+                    $result = $conn->query($sql);
+                    $none = 0;
+                    while($row=$result->fetch_assoc()) {
+                        $none = 1;
+                    }
+                    
+                    if($none === 0) {
+                        echo "alert('No programs to add area to.'); return false;";
+                    }
+                ?>
+            }
+        </script>
     </body>
 </html>

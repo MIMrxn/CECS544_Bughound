@@ -56,8 +56,6 @@
 
         <h2>
             <?php
-                $sql = "";
-                
                 $source = $_GET['source'];
                 if($source == 'edit') {
                     echo "<h2>Results for Functional Areas to Edit\n</h2><h3>Click on functional area ID number to edit.</h3>";
@@ -70,23 +68,33 @@
                 }
 
                 $area_name = $_POST['area_name'];
+                $program_name = $_POST['program_name'];
 
-                $sql = " SELECT * FROM areas WHERE area_name = '".$area_name."' ";
+                
+                $sql = "";
+                if($area_name != "" && $program_name === "") {
+                    $sql .= "SELECT A.area_id, A.area_name, P.program_name, P.program_release, P.program_version FROM areas as A, programs as P WHERE A.area_name = '".$area_name."' AND A.program_id = P.program_id AND A.is_visible = 1";
+                    $previous_selection_exists = true;
+                } else if($area_name === "" && $program_name != "") {
+                    $sql .= "SELECT A.area_id, A.area_name, P.program_name, P.program_release, P.program_version FROM areas as A, programs as P WHERE P.program_name = '".$program_name."' AND A.program_id = P.program_id AND A.is_visible = 1";
+                } else if($area_name != "" && $program_name != "") {
+                    $sql = "SELECT A.area_id, A.area_name, P.program_name, P.program_release, P.program_version FROM areas as A, programs as P WHERE A.area_name = '".$area_name."' AND P.program_name = '".$program_name."' AND A.program_id = P.program_id AND A.is_visible = 1";
+                }
 
                 $none = 0;
                 $result = $conn->query($sql);
 
-                echo "<table border=1><th>ID</th><th>Area Name</th>\n";
+                echo "<table border=1><th>Area ID</th><th>Area Name</th><th>Program Name</th><th>Release</th><th>Version</th>\n";
                 while($row=mysqli_fetch_row($result)) {
                     $none=1;
                     if($source == 'edit') {
-                        printf("<tr><td><a href='edit_functional_area.php?area_id=%d'>%d</a></td><td>%s</td></tr>\n",$row[0],$row[0],$row[1]);
+                        printf("<tr><td><a href='edit_functional_area.php?area_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$row[1],$row[2],$row[3],$row[4]);
                     }
                     if($source == 'delete') {
-                        printf("<tr><td><a onclick='return confirm_delete(%d);' href='delete_functional_area.php?area_id=%d'>%d</a></td><td>%s</td></tr>\n",$row[0],$row[0],$row[0],$row[1]);
+                        printf("<tr><td><a onclick='return confirm_delete(%d);' href='delete_functional_area.php?area_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$row[0],$row[1],$row[2],$row[3],$row[4]);
                     }
                     if($source == 'search') {
-                        printf("<tr><td>%d</td><td>%s</td></tr>\n",$row[0],$row[1]);
+                        printf("<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[1],$row[2],$row[3],$row[4]);
                     }
                 }
                 echo "</table>";

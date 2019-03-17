@@ -51,9 +51,9 @@
             $conn = new mysqli($servername, $username, $password);
             mysqli_select_db($conn, "bughound_db");
             $query = "INSERT INTO bugs (program_name, report_type, severity, summary, reproducible, problem_description, suggested_fix, reported_by, date_discovered, functional_area_name, assigned_to, status, priority, resolution, resolution_version, resolved_by, date_resolved, tested_by, date_tested, treat_deferred, has_attachments, comments) VALUES ('".$program_name."','".$report_type."','".$severity."','".$summary."','".$reproducible."','".$problem_description."','".$suggested_fix."','".$reported_by."','".$date_discovered."','".$functional_area_name."','".$assigned_to."','".$status."','".$priority."','".$resolution."','".$resolution_version."','".$resolved_by."','".$date_resolved."','".$tested_by."','".$date_tested."','".$treat_deferred."','".$has_attachments."','".$comments."')";
-            //echo $query;
+            echo $query;
             mysqli_query($conn, $query);
-            header("Location: create_report.php");
+            header("Location: index.php");
             exit;
         ?>
     </body>
