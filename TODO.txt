@@ -6,8 +6,6 @@ TODO:
 	- Export tables separately 
 		- In ASCII text
 		- In XML
-	- Employees
-		- Add support for new DB to all management functions (add, edit, delete, search)
 	- Reports
 		- Add support for new DB to all management functions (add, edit, search)
 
@@ -23,10 +21,11 @@ TODO:
 		- Areas
 			- Support to add areas to a program
 			- Management functions (add, edit, delete, search) now supported in new DB.
+		- Employees
+			- Add support for new DB to all management functions (add, edit, delete, search)
 
 - Currently working on
 	M:
-		- Bughound revisions
-			- Employees
-				- Add support for new DB to all management functions (add, edit, delete, search)
+		- Reports
+			- Add support for new DB to all management functions (add, edit, search)
 				

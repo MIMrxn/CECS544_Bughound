@@ -18,8 +18,8 @@
 
             $emp_id = $_GET['emp_id'];
             
-            $query = "DELETE FROM employees WHERE employee_id = '".$emp_id."'";
-            echo $query;
+            $query = "UPDATE employees SET is_visible = 0 WHERE employee_id = '".$emp_id."'";
+            //echo $query;
             mysqli_query($conn, $query);
             $conn->close();
             header("Location: manage_employees.php");

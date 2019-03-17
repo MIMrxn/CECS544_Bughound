@@ -32,7 +32,7 @@
             $user_level = $_POST['user_level'];
             
             $query = "UPDATE employees SET first_name = '".$first_name."', last_name = '".$last_name."', user_name = '".$user_name."', password = '".$user_pass."', position = '".$position."', group_num = '".$group_num."', is_reporter = '".$is_reporter."', user_level = '".$user_level."' WHERE employee_id = '".$emp_id."'";
-            echo $query;
+            //echo $query;
             mysqli_query($conn, $query);
             $conn->close();
             header("Location: manage_employees.php");
