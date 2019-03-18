@@ -16,17 +16,17 @@
             $conn = new mysqli($servername, $username, $password);
             mysqli_select_db($conn, "bughound_db");
 
-            $program_name = $_GET['program_name'];
-
+            //$program_name = $_GET['program_name'];
+            $program_id = $_GET['program_id'];
 			
-            $sql = "SELECT * FROM programs WHERE program_name = '$program_name'";
+            $sql = "SELECT * FROM programs WHERE program_id = '$program_id'";
 
             $result = $conn->query($sql);
             $row = mysqli_fetch_row($result);
-            $program_name = $row[0];
-            $program_version = $row[1];
+            $program_name = $row[1];
             $program_release = $row[2];
-            $program_release_date = $row[3];
+            $program_version = $row[3];
+            $program_release_date = $row[4];
             
             $conn->close();
 
@@ -69,11 +69,11 @@
 
         <h2><center><font color="gray">Edit a Program Entry</font></center></h2>
 
-        <form name="edit_search_programs_form" action="edit_program_post.php?program_name=<?php echo $program_name; ?>" method="post" onsubmit="return validate(this)">
+        <form name="edit_search_programs_form" action="edit_program_post.php?program_id=<?php echo $program_id; ?>" method="post" onsubmit="return validate(this)">
             <table>
                 <tr><td>Program Name:</td><td><input type="Text" name="program_name" value="<?php echo $program_name; ?>" /></td></tr>
-                <tr><td>Program Version:</td><td><input type="Number" name="program_version" value="<?php echo $program_version; ?>" /></td></tr>
                 <tr><td>Program Release:</td><td><input type="Number" name="program_release" value="<?php echo $program_release; ?>" /></td></tr>
+                <tr><td>Program Version:</td><td><input type="Number" name="program_version" value="<?php echo $program_version; ?>" /></td></tr>
                 <tr><td>Program Release Date:</td><td><input type="Date" name="program_release_date" value="<?php echo $program_release_date; ?>" /></td></tr>
                   
             </table>
@@ -83,15 +83,15 @@
 
         <script language=Javascript>
             function validate(theform) {
-                if(theform.program_name.value === ""){
+                if(theform.program_name.value.trim() === ""){
                     alert ("Program name field must contain characters");
                     return false;
                 }
-                if(theform.program_version.value === ""){
+                if(theform.program_version.value.trim() === ""){
                     alert ("Program version field must contain characters");
                     return false;
                 }
-                if(theform.program_release.value === ""){
+                if(theform.program_release.value.trim() === ""){
                     alert ("Program release field must contain characters");
                     return false;
                 }

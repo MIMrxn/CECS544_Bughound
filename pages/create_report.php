@@ -54,22 +54,25 @@
             ?>
         </ul>
 
-        <h2><font color="gray">New Bug Report Entry</font></h2>
+        <h2><center><font color="gray">New Bug Report Entry</font></center></h2>
         
         <form name="new_report_form" action="create_report_post.php" method="post" onsubmit="return validate(this)">
             <table>
                 <tr>
                     <td>Program:</td>
                     <td>
-                        <select name="program_name">
+                        <select name="program_id" id="programs" onchange="updateAreas()">
                             <option value="default" selected>Select Program</option>
-							<!-- Get all program info from DB here -->
-							<?php
-                                $sql = "SELECT program_name FROM programs";
+                            <!-- Get all program info from DB here -->
+                            <?php
+                                $sql = "SELECT program_id, program_name, program_release, program_version FROM programs WHERE is_visible = 1";
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
+                                    $program_id = $row['program_id'];
                                     $program_name = $row['program_name'];
-                                    echo '<option value="'.$program_name.'">'.$program_name.'</option>';
+                                    $program_release = $row['program_release'];
+                                    $program_version = $row['program_version'];
+                                    echo '<option value="'.$program_id.'">'.$program_name.' Rel. '.$program_release.' Ver. '.$program_version.'</option>';
                                 }
                             ?>
                         </select>
@@ -122,7 +125,7 @@
                         <select name="reported_by">
                             <option value="default" selected>Select Reporter</option>
                             <?php
-                                $sql = "SELECT employee_id, CONCAT(first_name, ' ', last_name) as employee_name FROM employees";
+                                $sql = "SELECT employee_id, CONCAT(first_name, ' ', last_name) as employee_name FROM employees WHERE is_visible = 1";
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
                                     $employee_id = $row['employee_id'];
@@ -143,15 +146,16 @@
                 <tr>
                     <td>Functional Area:</td>
                     <td>
-                        <select name="functional_area_name">
+                        <select name="area_id" id="areas">
                             <option value="default" selected>Select Area</option>
-							<!-- Get all program info from DB here -->
-							<?php
-                                $sql = "SELECT area_name FROM areas";
+                            <?php
+                                $sql = "SELECT area_id, area_name, program_id FROM areas WHERE is_visible = 1";
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
+                                    $area_id = $row['area_id'];
                                     $area_name = $row['area_name'];
-                                    echo '<option value="'.$area_name.'">'.$area_name.'</option>';
+                                    $program_id = $row['program_id'];
+                                    echo '<option data-program="'.$program_id.'" value="'.$area_id.'">'.$area_name.'</option>';
                                 }
                             ?>
                         </select>
@@ -161,7 +165,7 @@
                         <select name="assigned_to">
                             <option value="default" selected>Select Assignee</option>
                             <?php
-                                $sql = "SELECT employee_id, CONCAT(first_name, ' ', last_name) as employee_name FROM employees";
+                                $sql = "SELECT employee_id, CONCAT(first_name, ' ', last_name) as employee_name FROM employees WHERE is_visible = 1";
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
                                     $employee_id = $row['employee_id'];
@@ -222,7 +226,7 @@
                         <select name="resolved_by">
                             <option value="default" selected>Select Resolver</option>
                             <?php
-                                $sql = "SELECT employee_id, CONCAT(first_name, ' ', last_name) as employee_name FROM employees";
+                                $sql = "SELECT employee_id, CONCAT(first_name, ' ', last_name) as employee_name FROM employees WHERE is_visible = 1";
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
                                     $employee_id = $row['employee_id'];
@@ -239,7 +243,7 @@
                         <select name="tested_by">
                             <option value="default" selected>Select Tester</option>
                             <?php
-                                $sql = "SELECT employee_id, CONCAT(first_name, ' ', last_name) as employee_name FROM employees";
+                                $sql = "SELECT employee_id, CONCAT(first_name, ' ', last_name) as employee_name FROM employees WHERE is_visible = 1";
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
                                     $employee_id = $row['employee_id'];
@@ -278,8 +282,39 @@
         </form>
 
         <script language=Javascript>
+            function updateAreas() {
+                var programs = document.getElementById('programs');
+                var programID = programs.value;
+                var areas = document.getElementById('areas');
+                
+                var values = [];
+                var texts = [];
+                var data = [];
+
+                for(var i=0; i<areas.length; i++) {
+                    values[i] = areas[i].value;
+                    texts[i] = areas[i].text;
+                    data[i] = areas[i].getAttribute('data-program');
+                }
+
+                while(areas.options.length > 1) {
+                    areas.remove(areas.options.length - 1);
+                }
+
+                for(var i=0; i<values.length; i++) {
+                    if(data[i] === programID) {
+                        var opt = document.createElement("option");
+                        opt.value = values[i];
+                        opt.text = texts[i];
+                        areas.add(opt);
+                    }
+                }
+            }
+        </script>
+
+        <script language=Javascript>
             function validate(theform) {
-                if(theform.program_name.value === "default"){
+                if(theform.program_id.value === "default"){
                     alert ("Program must be selected");
                     return false;
                 }
@@ -291,11 +326,11 @@
                     alert ("Severity must be selected");
                     return false;
                 }
-                if(theform.summary.value === ""){
+                if(theform.summary.value.trim() === ""){
                     alert ("Summary field must contain characters");
                     return false;
                 }
-                if(theform.problem_description.value === ""){
+                if(theform.problem_description.value.trim() === ""){
                     alert ("Problem description must be filled");
                     return false;
                 }
@@ -307,47 +342,7 @@
                     alert ("Date Discovered must be filled");
                     return false;
                 }
-                if(theform.functional_area_name.value === "default"){
-                    alert ("Functional area must be selected");
-                    return false;
-                }
-                if(theform.assigned_to.value === "default"){
-                    alert ("Assigned To must be selected");
-                    return false;
-                }
-                if(theform.status.value === "default"){
-                    alert ("Status must be selected");
-                    return false;
-                }
-                if(theform.priority.value === "default"){
-                    alert ("Priority must be selected");
-                    return false;
-                }
-                if(theform.resolution.value === "default"){
-                    alert ("Resolution must be selected");
-                    return false;
-                }
-                if(theform.resolution_version.value === ""){
-                    alert ("Resolution version must be filled");
-                    return false;
-                }
-                if(theform.resolved_by.value === "default"){
-                    alert ("Resolved By must be selected");
-                    return false;
-                }
-                if(theform.date_resolved.value === ""){
-                    alert ("Date Resolved must be selected");
-                    return false;
-                }
-                if(theform.tested_by.value === "default"){
-                    alert ("Tested By must be selected");
-                    return false;
-                }
-                if(theform.date_tested.value === ""){
-                    alert ("Date Tested must be selected");
-                    return false;
-                }
-
+                
                 return true;
             }
         </script>

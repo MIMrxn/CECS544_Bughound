@@ -48,11 +48,11 @@
 
         <h2><center><font color="gray">Add a Program Entry</font></center></h2>
 
-        <form name="add_employee_form" action="add_program_post.php" method="post" onsubmit="return validate(this)">
+        <form name="add_program_form" action="add_program_post.php" method="post" onsubmit="return validate(this)">
             <table>
                 <tr><td>Program Name:</td><td><input type="Text" name="program_name" /></td></tr>
-                <tr><td>Program Version:</td><td><input type="Number" name="program_version" /></td></tr>
                 <tr><td>Program Release:</td><td><input type="Number" name="program_release" /></td></tr>
+                <tr><td>Program Version:</td><td><input type="Number" name="program_version" /></td></tr>
                 <tr><td>Program Release Date:</td><td><input type="Date" name="program_release_date" /></td></tr>     
             </table>
             <input type="submit" name="submit" value="Submit" />
@@ -61,16 +61,16 @@
 
         <script language=Javascript>
             function validate(theform) {
-                if(theform.program_name.value === ""){
+                if(theform.program_name.value.trim() === ""){
                     alert ("Program name field must contain characters");
                     return false;
                 }
-                if(theform.program_version.value === ""){
-                    alert ("Program version field must contain characters");
+                if(theform.program_release.value.trim() === ""){
+                    alert ("Program release field must contain characters");
                     return false;
                 }
-                if(theform.program_release.value === ""){
-                    alert ("Program release field must contain characters");
+                if(theform.program_version.value.trim() === ""){
+                    alert ("Program version field must contain characters");
                     return false;
                 }
                 if(theform.program_release_date.value === ""){

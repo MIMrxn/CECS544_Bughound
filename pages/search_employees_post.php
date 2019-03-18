@@ -124,6 +124,7 @@
                     $sql .= " user_level = '".$user_level."' ";
                     $previous_selection_exists = true;
                 }
+                $sql .= "AND is_visible = 1";
 
                 $none = 0;
                 $result = $conn->query($sql);

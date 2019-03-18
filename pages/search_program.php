@@ -68,10 +68,10 @@
                     <td>Program Name:</td><td><input type="Text" name="program_name" /></td>
                 </tr>
                 <tr>
-                    <td>Program Version:</td><td><input type="Number" name="program_version" /></td>
+                    <td>Program Release:</td><td><input type="Number" name="program_release" /></td>
                 </tr>
                 <tr>
-                    <td>Program Release:</td><td><input type="Number" name="program_release" /></td>
+                    <td>Program Version:</td><td><input type="Number" name="program_version" /></td>
                 </tr>
                 <tr>
                     <td>Program Release Date:</td><td><input type="Date" name="program_release_date" /></td>
@@ -86,13 +86,13 @@
         <script language=Javascript>
             function validate(theform) {
                 var at_least_one_selected = true;
-                if(theform.program_name.value === "") {
+                if(theform.program_name.value.trim() === "") {
                     at_least_one_selected = false;
                 }
-                if(theform.program_version.value != "" && at_least_one_selected === false) {
+                if(theform.program_version.value.trim() != "" && at_least_one_selected === false) {
                     at_least_one_selected = true;
                 }
-                if(theform.program_release.value != "" && at_least_one_selected === false) {
+                if(theform.program_release.value.trim() != "" && at_least_one_selected === false) {
                     at_least_one_selected = true;
                 }
                 if(theform.program_release_date.value != "" && at_least_one_selected === false) {

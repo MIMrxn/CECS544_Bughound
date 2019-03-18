@@ -65,8 +65,11 @@
         <form name="search_functional_areas_form" action="search_functional_areas_post.php?source=<?php echo $source; ?>" method="post" onsubmit="return validate(this)">
             <table>
                 <tr>
+                    <td>Program Name:</td><td><input type="Text" name="program_name" /></td>
+                </tr>
+                <tr>
                     <td>Area Name:</td><td><input type="Text" name="area_name" /></td>
-                </tr>  
+                </tr>
             </table>
 
             <input type="submit" name="search_reports_submit" value="Search"/>
@@ -76,11 +79,20 @@
 
         <script language=Javascript>
             function validate(theform) {
-                if(theform.area_name.value === "") {
-                    alert ("Area Name field must contain characters");
+                var at_least_one_selected = true;
+                if(theform.program_name.value.trim() === "") {
+                    var at_least_one_selected = false;
+                }
+                if(theform.area_name.value.trim() != "" && at_least_one_selected === false) {
+                    at_least_one_selected = true;
+                }
+                
+                if(at_least_one_selected === true) {
+                    return true;
+                } else {
+                    alert ("At least one search term must be selected/filled in.");
                     return false;
                 }
-                return true;
             }
         </script>
     </body>

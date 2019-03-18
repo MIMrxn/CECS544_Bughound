@@ -13,7 +13,7 @@
             $username = "root";
             $password = "";
 
-            $program_name = $_POST['program_name'];
+            $program_id = $_POST['program_id'];
             $report_type = $_POST['report_type'];
             $severity = $_POST['severity'];
             $summary = $_POST['summary'];
@@ -26,7 +26,7 @@
             $suggested_fix = $_POST['suggested_fix'];
             $reported_by = $_POST['reported_by'];
             $date_discovered = $_POST['date_discovered'];
-            $functional_area_name = $_POST['functional_area_name'];
+            $area_id = $_POST['area_id'];
             $assigned_to = $_POST['assigned_to'];
             $status = $_POST['status'];
             $priority = $_POST['priority'];
@@ -48,12 +48,47 @@
             }
             $comments = $_POST['comments'];
 
+            if($area_id === "default") {
+                $area_id = NULL;
+            }
+            if($assigned_to === "default") {
+                $assigned_to = NULL;
+            }
+            if($status === "default") {
+                $status = NULL;
+            }
+            if($priority === "default") {
+                $priority = NULL;
+            }
+            if($resolution === "default") {
+                $resolution = NULL;
+            }
+            if($resolution_version === "default") {
+                $resolution_version = NULL;
+            }
+            if($resolved_by === "default") {
+                $resolved_by = NULL;
+            }
+            if($date_resolved === "") {
+                $date_resolved = NULL;
+            }
+            if($tested_by === "default") {
+                $tested_by = NULL;
+            }
+            if($date_tested === "") {
+                $date_tested = NULL;
+            }
+
             $conn = new mysqli($servername, $username, $password);
             mysqli_select_db($conn, "bughound_db");
-            $query = "INSERT INTO bugs (program_name, report_type, severity, summary, reproducible, problem_description, suggested_fix, reported_by, date_discovered, functional_area_name, assigned_to, status, priority, resolution, resolution_version, resolved_by, date_resolved, tested_by, date_tested, treat_deferred, has_attachments, comments) VALUES ('".$program_name."','".$report_type."','".$severity."','".$summary."','".$reproducible."','".$problem_description."','".$suggested_fix."','".$reported_by."','".$date_discovered."','".$functional_area_name."','".$assigned_to."','".$status."','".$priority."','".$resolution."','".$resolution_version."','".$resolved_by."','".$date_resolved."','".$tested_by."','".$date_tested."','".$treat_deferred."','".$has_attachments."','".$comments."')";
-            //echo $query;
-            mysqli_query($conn, $query);
-            header("Location: create_report.php");
+            $stmt = $conn->prepare("INSERT INTO bugs (program_id, report_type, severity, summary, reproducible, problem_description, suggested_fix, reported_by, date_discovered, area_id, assigned_to, status, priority, resolution, resolution_version, resolved_by, date_resolved, tested_by, date_tested, treat_deferred, has_attachments, comments) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("isissssisiisisiisissss", $program_id, $report_type, $severity, $summary, $reproducible, $problem_description, $suggested_fix, $reported_by, $date_discovered, $area_id, $assigned_to, $status, $priority, $resolution, $resolution_version, $resolved_by, $date_resolved, $tested_by, $date_tested, $treat_deferred, $has_attachments, $comments);
+            $stmt->execute();
+            
+            $stmt->close();
+            $conn->close();
+            
+            header("Location: index.php");
             exit;
         ?>
     </body>

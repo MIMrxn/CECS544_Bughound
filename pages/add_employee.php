@@ -76,19 +76,19 @@
 
         <script language=Javascript>
             function validate(theform) {
-                if(theform.first_name.value === ""){
-                    alert ("Name field must contain characters");
+                if(theform.first_name.value.trim() === ""){
+                    alert ("First Name field must contain characters");
                     return false;
                 }
-                if(theform.last_name.value === ""){
-                    alert ("Name field must contain characters");
+                if(theform.last_name.value.trim() === ""){
+                    alert ("Last Name field must contain characters");
                     return false;
                 }
-                if(theform.user_name.value === ""){
+                if(theform.user_name.value.trim() === ""){
                     alert ("User name field must contain characters");
                     return false;
                 }
-                if(theform.user_pass.value === ""){
+                if(theform.user_pass.value.trim() === ""){
                     alert ("Password field must contain characters");
                     return false;
                 }
@@ -96,7 +96,7 @@
                     alert ("Must select a position");
                     return false;
                 }
-                if(theform.group_num.value === ""){
+                if(theform.group_num.value.trim() === ""){
                     alert ("Group number field must contain a number");
                     return false;
                 }
