@@ -59,13 +59,14 @@
                 
                 $source = $_GET['source'];
                 if($source == 'update') {
-                    echo "<h2>Results for Reports to Update\n</h2><h3>Click on report ID number to update.</h3>";
+                    echo "<h2><center>Results for Reports to Update\n</center></h2><h3>Click on report ID number to update.</h3>";
                 }
                 if($source == 'search') {
-                    echo "<h2>Results for Reports Search\n</h2>";
+                    echo "<h2><center>Results for Reports Search\n</center></h2>";
                 }
 
-                $program_name = $_POST['program_name'];
+                //$program_name = $_POST['program_name'];
+                $program_id = $_POST['program_id'];
                 $report_type = $_POST['report_type'];
                 $severity = $_POST['severity'];
                 /*
@@ -78,7 +79,7 @@
                 */
                 $reported_by = $_POST['reported_by'];
                 $date_discovered = $_POST['date_discovered'];
-                $functional_area_name = $_POST['functional_area_name'];
+                $area_id = $_POST['area_id'];
                 $assigned_to = $_POST['assigned_to'];
                 $status = $_POST['status'];
                 $priority = $_POST['priority'];
@@ -98,109 +99,122 @@
                 */
 
                 $previous_selection_exists = false;
-                $sql = "SELECT * FROM bugs WHERE ";
-                if($program_name != "default") {
-                    $sql .= " program_name = '".$program_name."' ";
+                //$sql = "SELECT b.report_id, p.program_name, b.report_type, b.severity, b.summary, b.reproducible, b.problem_description, b.suggested_fix, b.reported_by, b.date_discovered, a.area_name, b.assigned_to, b.status, b.priority, b.resolution, b.resolution_version, b.resolved_by, b.date_resolved, b.tested_by, b.date_tested, b.treat_deferred, b.has_attachments, b.comments FROM bugs AS b, programs AS p, areas AS a WHERE ";
+                $sql = "SELECT * FROM bugs as b WHERE ";
+                if($program_id != "default") {
+                    $sql .= " b.program_id = '".$program_id."' ";
                     $previous_selection_exists = true;
                 }
                 if($report_type != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND report_type = '".$report_type."' ";
+                    $sql .= " AND b.report_type = '".$report_type."' ";
                 } else if($report_type != "default" && $previous_selection_exists === false) {
-                    $sql .= " report_type = '".$report_type."' ";
+                    $sql .= " b.report_type = '".$report_type."' ";
                     $previous_selection_exists = true;
                 }
                 if($severity != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND severity = '".$severity."' ";
+                    $sql .= " AND b.severity = '".$severity."' ";
                 } else if($severity != "default" && $previous_selection_exists === false) {
-                    $sql .= " severity = '".$severity."' ";
+                    $sql .= " b.severity = '".$severity."' ";
                     $previous_selection_exists = true;
                 }
                 if($reported_by != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND reported_by = '".$reported_by."' ";
+                    $sql .= " AND b.reported_by = '".$reported_by."' ";
                 } else if($reported_by != "default" && $previous_selection_exists === false) {
-                    $sql .= " reported_by = '".$reported_by."' ";
+                    $sql .= " b.reported_by = '".$reported_by."' ";
                     $previous_selection_exists = true;
                 }
                 if($date_discovered != "" && $previous_selection_exists === true) {
-                    $sql .= " AND date_discovered = '".$date_discovered."' ";
+                    $sql .= " AND b.date_discovered = '".$date_discovered."' ";
                 } else if($date_discovered != "" && $previous_selection_exists === false) {
-                    $sql .= " date_discovered = '".$date_discovered."' ";
+                    $sql .= " b.date_discovered = '".$date_discovered."' ";
                     $previous_selection_exists = true;
                 }
-                if($functional_area_name != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND functional_area_name = '".$functional_area_name."' ";
-                } else if($functional_area_name != "default" && $previous_selection_exists === false) {
-                    $sql .= " functional_area_name = '".$functional_area_name."' ";
+                if($area_id != "default" && $previous_selection_exists === true) {
+                    $sql .= " AND b.area_id = '".$area_id."' ";
+                } else if($area_id != "default" && $previous_selection_exists === false) {
+                    $sql .= " b.area_id = '".$area_id."' ";
                     $previous_selection_exists = true;
                 }
                 if($assigned_to != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND assigned_to = '".$assigned_to."' ";
+                    $sql .= " AND b.assigned_to = '".$assigned_to."' ";
                 } else if($assigned_to != "default" && $previous_selection_exists === false) {
-                    $sql .= " assigned_to = '".$assigned_to."' ";
+                    $sql .= " b.assigned_to = '".$assigned_to."' ";
                     $previous_selection_exists = true;
                 }
                 if($status != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND status = '".$status."' ";
+                    $sql .= " AND b.status = '".$status."' ";
                 } else if($status != "default" && $previous_selection_exists === false) {
-                    $sql .= " status = '".$status."' ";
+                    $sql .= " b.status = '".$status."' ";
                     $previous_selection_exists = true;
                 }
                 if($priority != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND priority = '".$priority."' ";
+                    $sql .= " AND b.priority = '".$priority."' ";
                 } else if($priority != "default" && $previous_selection_exists === false) {
-                    $sql .= " priority = '".$priority."' ";
+                    $sql .= " b.priority = '".$priority."' ";
                     $previous_selection_exists = true;
                 }
                 if($resolution != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND resolution = '".$resolution."' ";
+                    $sql .= " AND b.resolution = '".$resolution."' ";
                 } else if($resolution != "default" && $previous_selection_exists === false) {
-                    $sql .= " resolution = '".$resolution."' ";
+                    $sql .= " b.resolution = '".$resolution."' ";
                     $previous_selection_exists = true;
                 }
                 if($resolution_version != "" && $previous_selection_exists === true) {
-                    $sql .= " AND resolution_version = '".$resolution_version."' ";
+                    $sql .= " AND b.resolution_version = '".$resolution_version."' ";
                 } else if($resolution_version != "" && $previous_selection_exists === false) {
-                    $sql .= " resolution_version = '".$resolution_version."' ";
+                    $sql .= " b.resolution_version = '".$resolution_version."' ";
                     $previous_selection_exists = true;
                 }
                 if($resolved_by != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND resolved_by = '".$resolved_by."' ";
+                    $sql .= " AND b.resolved_by = '".$resolved_by."' ";
                 } else if($resolved_by != "default" && $previous_selection_exists === false) {
-                    $sql .= " resolved_by = '".$resolved_by."' ";
+                    $sql .= " b.resolved_by = '".$resolved_by."' ";
                     $previous_selection_exists = true;
                 }
                 if($date_resolved != "" && $previous_selection_exists === true) {
-                    $sql .= " AND date_resolved = '".$date_resolved."' ";
+                    $sql .= " AND b.date_resolved = '".$date_resolved."' ";
                 } else if($date_resolved != "" && $previous_selection_exists === false) {
-                    $sql .= " date_resolved = '".$date_resolved."' ";
+                    $sql .= " b.date_resolved = '".$date_resolved."' ";
                     $previous_selection_exists = true;
                 }
                 if($tested_by != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND tested_by = '".$tested_by."' ";
+                    $sql .= " AND b.tested_by = '".$tested_by."' ";
                 } else if($tested_by != "default" && $previous_selection_exists === false) {
-                    $sql .= " tested_by = '".$tested_by."' ";
+                    $sql .= " b.tested_by = '".$tested_by."' ";
                     $previous_selection_exists = true;
                 }
                 if($date_tested != "" && $previous_selection_exists === true) {
-                    $sql .= " AND date_tested = '".$date_tested."' ";
+                    $sql .= " AND b.date_tested = '".$date_tested."' ";
                 } else if($date_tested != "" && $previous_selection_exists === false) {
-                    $sql .= " date_tested = '".$date_tested."' ";
+                    $sql .= " b.date_tested = '".$date_tested."' ";
                     $previous_selection_exists = true;
                 }
-                
-                //echo $sql;
 
+                //echo $sql;
+                
                 $none = 0;
                 $result = $conn->query($sql);
 
-                echo "<table border=1><th>Bug Report ID</th><th>Program Name</th><th>Report Type</th><th>Severity</th><th>Has Attachments</th><th>Summary</th><th>Is Reproducible</th><th>Problem Description</th><th>Suggested Fix</th><th>Reported By</th><th>Date Discovered</th><th>Functional Area Name</th><th>Assigned To</th><th>Comments</th><th>Status</th><th>Priority</th><th>Resolution</th><th>Resolution Version</th><th>Resolved By</th><th>Date Resolved</th><th>Tested By</th><th>Date Tested</th><th>Is Deffered</th>\n";
+                echo "<table border=1 class='searchTable'><th>Bug Report ID</th><th>Program Name</th><th>Report Type</th><th>Severity</th><th>Summary</th><th>Is Reproducible</th><th>Problem Description</th><th>Suggested Fix</th><th>Reported By</th><th>Date Discovered</th><th>Functional Area Name</th><th>Assigned To</th><th>Status</th><th>Priority</th><th>Resolution</th><th>Resolution Version</th><th>Resolved By</th><th>Date Resolved</th><th>Tested By</th><th>Date Tested</th><th>Is Deffered</th><th>Has Attachments</th><th>Comments</th>\n";
                 while($row=mysqli_fetch_row($result)) {
                     $none=1;
+
+                    $fetched_program_id = $row[1];
+                    $fetched_area_id = $row[10];
+                    $sql_p = "SELECT p.program_name FROM programs AS p WHERE p.program_id = '".$fetched_program_id."' ";
+                    $sql_a = "SELECT a.area_name FROM areas AS a WHERE a.area_id = '".$fetched_area_id."' ";
+                    $result_p = $conn->query($sql_p);
+                    $result_a = $conn->query($sql_a);
+                    $row_p=mysqli_fetch_row($result_p);
+                    $row_a=mysqli_fetch_row($result_a);
+                    $program_name = $row_p[0];
+                    $area_name = $row_a[0];
+
                     if($source === 'update') {
-                        printf("<tr><td><a href='update_report.php?report_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11],$row[12],$row[13],$row[14],$row[15],$row[16],$row[17],$row[18],$row[19],$row[20],$row[21],$row[22]);
+                        printf("<tr><td><a href='update_report.php?report_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$program_name,$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$area_name,$row[11],$row[12],$row[13],$row[14],$row[15],$row[16],$row[17],$row[18],$row[19],$row[20],$row[21],$row[22]);
                     }
                     if($source === 'search') {
-                        printf("<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11],$row[12],$row[13],$row[14],$row[15],$row[16],$row[17],$row[18],$row[19],$row[20],$row[21],$row[22]);
+                        printf("<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$program_name,$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$area_name,$row[11],$row[12],$row[13],$row[14],$row[15],$row[16],$row[17],$row[18],$row[19],$row[20],$row[21],$row[22]);
                     }
                 }
                 echo "</table>";
@@ -210,6 +224,7 @@
                 }
                 
                 $conn->close();
+                
             ?>
         </h2>
         

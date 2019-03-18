@@ -48,7 +48,7 @@
 
         <h2><center><font color="gray">Add a Program Entry</font></center></h2>
 
-        <form name="add_employee_form" action="add_program_post.php" method="post" onsubmit="return validate(this)">
+        <form name="add_program_form" action="add_program_post.php" method="post" onsubmit="return validate(this)">
             <table>
                 <tr><td>Program Name:</td><td><input type="Text" name="program_name" /></td></tr>
                 <tr><td>Program Release:</td><td><input type="Number" name="program_release" /></td></tr>

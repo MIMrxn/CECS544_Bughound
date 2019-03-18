@@ -24,7 +24,7 @@ input[type=submit]:hover {
 form[name=add_employee_form] {
     margin: auto;
     width: 275px;
-    height: 225px;
+    height: 235px;
     border-radius: 5px;
     background-color: #F2F2F2;
     padding: 20px;
@@ -34,7 +34,7 @@ form[name=add_employee_form] {
 form[name=add_program_form] {
     margin: auto;
     width: 275px;
-    height: 225px;
+    height: 200px;
     border-radius: 5px;
     background-color: #F2F2F2;
     padding: 20px;
@@ -43,7 +43,7 @@ form[name=add_program_form] {
 
 form[name=add_functional_area_form] {
     margin: auto;
-    width: 260px;
+    width: 275px;
     height: 100px;
     border-radius: 5px;
     background-color: #F2F2F2;
@@ -52,6 +52,17 @@ form[name=add_functional_area_form] {
 }
 
 form[name=new_report_form] {
+    margin: 0 auto;
+    width: 1000px;
+    height: 550px;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    padding: 20px;
+    overflow: scroll;
+}
+
+form[name=update_report_form] {
+    margin: 0 auto;
     width: 1000px;
     height: 550px;
     border-radius: 5px;
@@ -62,8 +73,8 @@ form[name=new_report_form] {
 
 form[name=search_employees_form] {
     margin: auto;
-    width: 450px;
-    height: 360px;
+    width: 300px;
+    height: 225px;
     border-radius: 5px;
     background-color: #F2F2F2;
     padding: 20px;
@@ -72,7 +83,7 @@ form[name=search_employees_form] {
 
 form[name=search_functional_areas_form] {
     margin: auto;
-    width: 400px;
+    width: 300px;
     height: 100px;
     border-radius: 5px;
     background-color: #F2F2F2;
@@ -82,8 +93,18 @@ form[name=search_functional_areas_form] {
 
 form[name=edit_search_programs_form] {
     margin: auto;
-    width: 460px;
-    height: 260px;
+    width: 325px;
+    height: 170px;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    padding: 20px;
+    overflow: scroll;
+}
+
+form[name=search_reports_form] {
+    margin: 0 auto;
+    width: 350px;
+    height: 425px;
     border-radius: 5px;
     background-color: #F2F2F2;
     padding: 20px;
@@ -92,6 +113,10 @@ form[name=edit_search_programs_form] {
 
 textarea {
     resize: none;
+}
+
+.searchTable {
+    margin: 0 auto;
 }
 
 .button {

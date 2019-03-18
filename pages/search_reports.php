@@ -75,15 +75,18 @@
                 <tr>
                     <td>Program:</td>
                     <td>
-                        <select name="program_name">
+                        <select name="program_id">
                             <option value="default" selected>Select Program</option>
                             <!-- Get all program info from DB here -->
                             <?php
-                                $sql = "SELECT program_name FROM programs";
+                                $sql = "SELECT program_id, program_name, program_release, program_version FROM programs WHERE is_visible = 1";
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
+                                    $program_id = $row['program_id'];
                                     $program_name = $row['program_name'];
-                                    echo '<option value="'.$program_name.'">'.$program_name.'</option>';
+                                    $program_release = $row['program_release'];
+                                    $program_version = $row['program_version'];
+                                    echo '<option value="'.$program_id.'">'.$program_name.' Rel. '.$program_release.' Ver. '.$program_version.'</option>';
                                 }
                             ?>
                         </select>
@@ -138,15 +141,16 @@
                 <tr>
                     <td>Functional Area:</td>
                     <td>
-                        <select name="functional_area_name">
+                        <select name="area_id">
                             <option value="default" selected>Select Area</option>
                             <!-- Get all program info from DB here -->
                             <?php
-                                $sql = "SELECT area_name FROM areas";
+                                $sql = "SELECT area_id, area_name FROM areas";
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
+                                    $area_id = $row['area_id'];
                                     $area_name = $row['area_name'];
-                                    echo '<option value="'.$area_name.'">'.$area_name.'</option>';
+                                    echo '<option value="'.$area_id.'">'.$area_name.'</option>';
                                 }
                             ?>
                         </select>
@@ -173,8 +177,8 @@
                     <td>Status:</td>
                     <td>
                         <select name="status">
-                            <option value="default" selected>Select Status</option>
-                            <option value="open">Open</option>
+                            <option value="default">N/A</option>
+                            <option value="open" selected>Open</option>
                             <option value="closed">Closed</option>
                             <option value="resolved">Resolved</option>
                         </select>
@@ -299,7 +303,7 @@
                 if(theform.resolution.value != "default" && at_least_one_selected === false) {
                     at_least_one_selected = true;
                 }
-                if(theform.resolution_version.value != "" && at_least_one_selected === false) {
+                if(theform.resolution_version.value.trim() != "" && at_least_one_selected === false) {
                     at_least_one_selected = true;
                 }
                 if(theform.resolved_by.value != "default" && at_least_one_selected === false) {

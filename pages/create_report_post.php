@@ -84,12 +84,10 @@
             $stmt = $conn->prepare("INSERT INTO bugs (program_id, report_type, severity, summary, reproducible, problem_description, suggested_fix, reported_by, date_discovered, area_id, assigned_to, status, priority, resolution, resolution_version, resolved_by, date_resolved, tested_by, date_tested, treat_deferred, has_attachments, comments) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("isissssisiisisiisissss", $program_id, $report_type, $severity, $summary, $reproducible, $problem_description, $suggested_fix, $reported_by, $date_discovered, $area_id, $assigned_to, $status, $priority, $resolution, $resolution_version, $resolved_by, $date_resolved, $tested_by, $date_tested, $treat_deferred, $has_attachments, $comments);
             $stmt->execute();
-            //$query = "INSERT INTO bugs (program_id, report_type, severity, summary, reproducible, problem_description, suggested_fix, reported_by, date_discovered, area_id, assigned_to, status, priority, resolution, resolution_version, resolved_by, date_resolved, tested_by, date_tested, treat_deferred, has_attachments, comments) VALUES ('".$program_id."','".$report_type."','".$severity."','".$summary."','".$reproducible."','".$problem_description."','".$suggested_fix."','".$reported_by."','".$date_discovered."','".$area_id."','".$assigned_to."','".$status."','".$priority."','".$resolution."','".$resolution_version."','".$resolved_by."','".$date_resolved."','".$tested_by."','".$date_tested."','".$treat_deferred."','".$has_attachments."','".$comments."')";
-            //echo $query;
             
             $stmt->close();
             $conn->close();
-            mysqli_query($conn, $query);
+            
             header("Location: index.php");
             exit;
         ?>

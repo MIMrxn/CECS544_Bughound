@@ -54,7 +54,7 @@
             ?>
         </ul>
 
-        <h2><font color="gray">New Bug Report Entry</font></h2>
+        <h2><center><font color="gray">New Bug Report Entry</font></center></h2>
         
         <form name="new_report_form" action="create_report_post.php" method="post" onsubmit="return validate(this)">
             <table>

@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>Bughound</title>
         <link rel="stylesheet" href="../assets/styles/nav_menu_style.css">
+        <link rel="stylesheet" href="../assets/styles/form_style.css">
     </head>
     <body>
         <!-- ADD YOUR DB INFO HERE -->
@@ -21,29 +22,29 @@
             $result = $conn->query($sql);
             $row = mysqli_fetch_row($result);
             
-            $program_name = $row[1];
+            $program_id = $row[1];
             $report_type = $row[2];
             $severity = $row[3];
-            $has_attachments = $row[4];
-            $summary = $row[5];
-            $reproducible = $row[6];
-            $problem_description = $row[7];
-            $suggested_fix = $row[8];
-            $reported_by = $row[9];
-            $date_discovered = $row[10];
-            $functional_area_name = $row[11];
-            $assigned_to = $row[12];
-            $comments = $row[13];
-            $status = $row[14];
-            $priority = $row[15];
-            $resolution = $row[16];
-            $resolution_version = $row[17];
-            $resolved_by = $row[18];
-            $date_resolved = $row[19];
-            $tested_by = $row[20];
-            $date_tested = $row[21];
-            $treat_deferred = $row[22];
-            
+            $summary = $row[4];
+            $reproducible = $row[5];
+            $problem_description = $row[6];
+            $suggested_fix = $row[7];
+            $reported_by = $row[8];
+            $date_discovered = $row[9];
+            $area_id = $row[10];
+            $assigned_to = $row[11];
+            $status = $row[12];
+            $priority = $row[13];
+            $resolution = $row[14];
+            $resolution_version = $row[15];
+            $resolved_by = $row[16];
+            $date_resolved = $row[17];
+            $tested_by = $row[18];
+            $date_tested = $row[19];
+            $treat_deferred = $row[20];
+            $has_attachments = $row[21];
+            $comments = $row[22];
+
             //$conn->close();
 
             session_start();
@@ -91,18 +92,21 @@
                 <tr>
                     <td>Program:</td>
                     <td>
-                        <select name="program_name">
+                        <select name="program_id">
                             <option value="default">Select Program</option>
                             <!-- Get all program info from DB here -->
                             <?php
-                                $sql = "SELECT program_name FROM programs";
+                                $sql = "SELECT program_id, program_name, program_release, program_version FROM programs WHERE program_id = '".$program_id."' ";
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
+                                    $fetched_program_id = $row['program_id'];
                                     $fetched_program_name = $row['program_name'];
-                                    if($fetched_program_name === $program_name) {
-                                        echo '<option value="'.$program_name.'" selected>'.$program_name.'</option>';
+                                    $fetched_program_release = $row['program_release'];
+                                    $fetched_program_version = $row['program_version'];
+                                    if($fetched_program_id === $program_id) {
+                                        echo '<option value="'.$fetched_program_id.'" selected>'.$fetched_program_name.' Rel. '.$fetched_program_release.' Ver. '.$fetched_program_version.'</option>';
                                     } else {
-                                        echo '<option value="'.$program_name.'">'.$program_name.'</option>';
+                                        echo '<option value="'.$fetched_program_id.'">'.$fetched_program_name.' Rel. '.$fetched_program_release.' Ver. '.$fetched_program_version.'</option>';
                                     }
                                 }
                             ?>
@@ -227,18 +231,19 @@
                 <tr>
                     <td>Functional Area:</td>
                     <td>
-                        <select name="functional_area_name">
+                        <select name="area_id">
                             <option value="default" selected>Select Area</option>
                             <!-- Get all program info from DB here -->
                             <?php
-                                $sql = "SELECT area_name FROM areas";
+                                $sql = "SELECT area_id, area_name FROM areas WHERE program_id = '".$program_id."' ";
                                 $result = $conn->query($sql);
                                 while($row=$result->fetch_assoc()) {
+                                    $fetched_area_id = $row['area_id'];
                                     $fetched_area_name = $row['area_name'];
-                                    if($functional_area_name === $fetched_area_name) {
-                                        echo '<option value="'.$fetched_area_name.'" selected>'.$fetched_area_name.'</option>';
+                                    if($fetched_area_id === $area_id) {
+                                        echo '<option value="'.$fetched_area_id.'" selected>'.$fetched_area_name.'</option>';
                                     } else {
-                                        echo '<option value="'.$fetched_area_name.'">'.$fetched_area_name.'</option>';
+                                        echo '<option value="'.$fetched_area_id.'">'.$fetched_area_name.'</option>';
                                     }
                                 }
                             ?>
