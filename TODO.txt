@@ -23,9 +23,11 @@ TODO:
 			- Management functions (add, edit, delete, search) now supported in new DB.
 		- Employees
 			- Add support for new DB to all management functions (add, edit, delete, search)
+		- Reports
+			- Add support for creating report with new DB
 
 - Currently working on
 	M:
 		- Reports
-			- Add support for new DB to all management functions (add, edit, search)
+			- Add support for new DB to all management functions (edit, search)
 				
