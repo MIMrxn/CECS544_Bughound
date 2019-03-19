@@ -1,11 +1,5 @@
 TODO:
 
-- Bughound revisions
-	- Export tables separately 
-		- In ASCII text
-		- In XML
-	
-
 - RESOLVED
 	- Database revisions
 		- Make program NOT unique
@@ -25,4 +19,7 @@ TODO:
 			- Add support for new DB to all management functions (update, search)
 		- Search for all reports defaults to searching for OPEN bugs
 		- Deleting programs/employees/areas shouldn't delete them from the database, only from searching for bug reports (dropdowns)
-				
+		- Export tables separately 
+			- In ASCII text
+			- In XML		
+		
