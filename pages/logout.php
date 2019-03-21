@@ -15,7 +15,7 @@
 					unset($_SESSION['user_level']);
 					session_destroy();
 					session_unset();
-					header('Location: index.php');
+					header('Location: login.php');
 					exit;
 				} else {
 					header('Location: login.php');
