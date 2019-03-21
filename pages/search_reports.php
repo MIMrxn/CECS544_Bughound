@@ -71,6 +71,7 @@
         </h2>
 
         <form name="search_reports_form" action="search_reports_post.php?source=<?php echo $source; ?>" method="post" onsubmit="return validate(this)">
+        <!-- <form id="s_form" name="search_reports_form" action="search_reports_post.php?source=<?php echo $source; ?>" method="post"> -->
             <table>
                 <tr>
                     <td>Program:</td>
@@ -264,74 +265,85 @@
                     <td><input type="checkbox" name="treat_deferred"></td>
                 <tr>
                 -->
+                <tr>
+                    <td>
+                        <!-- <input type="submit" name="search_reports_submit" value="Search" onclick="return validate(this)" /> -->
+                        <input type="submit" id="search" name="search_reports_submit" value="Search" onclick="this.form.submitted=this.value" />
+                        <input class="button" type="button" onclick="window.location.replace('search_reports.php?source=<?php echo $source; ?>')" value="Reset" />
+                        <input class="button" type="button" onclick="window.location.replace('index.php')" value="Cancel" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" id="search" name="search_reports_submit" value="Search All Bugs" onclick="this.form.submitted=this.value"/></td>
+                </tr>
             </table>
-            <input type="submit" name="search_reports_submit" value="Search"/>
-            <input class="button" type="button" onclick="window.location.replace('search_reports.php?source=<?php echo $source; ?>')" value="Reset" />
-            <input class="button" type="button" onclick="window.location.replace('index.php')" value="Cancel" />
         </form>
 
         <script language=Javascript>
             function validate(theform) {
-                var at_least_one_selected = true;
-                if(theform.program_name.value === "default") {
-                    at_least_one_selected = false;
-                }
-                if(theform.report_type.value != "default" && at_least_one_selected === false) {
-                    at_least_one_selected = true;
-                }
-                if(theform.severity.value != "default" && at_least_one_selected === false) {
-                    at_least_one_selected = true;
-                }
-                if(theform.reported_by.value != "default" && at_least_one_selected === false) {
-                    at_least_one_selected = true;
-                }
-                if(theform.date_discovered.value != "" && at_least_one_selected === false) {
-                    at_least_one_selected = true;
-                }
-                if(theform.functional_area_name.value != "default" && at_least_one_selected === false) {
-                    at_least_one_selected = true;
-                }
-                if(theform.assigned_to.value != "default" && at_least_one_selected === false) {
-                    at_least_one_selected = true;
-                }
-                if(theform.status.value != "default" && at_least_one_selected === false) {
-                    at_least_one_selected = true;
-                }
-                if(theform.priority.value != "default" && at_least_one_selected === false) {
-                    at_least_one_selected = true;
-                }
-                if(theform.resolution.value != "default" && at_least_one_selected === false) {
-                    at_least_one_selected = true;
-                }
-                if(theform.resolution_version.value.trim() != "" && at_least_one_selected === false) {
-                    at_least_one_selected = true;
-                }
-                if(theform.resolved_by.value != "default" && at_least_one_selected === false) {
-                    at_least_one_selected = true;
-                }
-                if(theform.date_resolved.value != "" && at_least_one_selected === false) {
-                    at_least_one_selected = true;
-                }
-                if(theform.tested_by.value != "default" && at_least_one_selected === false) {
-                    at_least_one_selected = true;
-                }
-                if(theform.date_tested.value != "" && at_least_one_selected === false){
-                    at_least_one_selected = true;
-                }
-                /*
-                if(isset(theform.treat_deferred) && theform.treat_deferred.value === 'True' && at_least_one_selected === false) {
-                    at_least_one_selected = true;
-                }
-                */
+                if(theform.submitted === "Search") {
+                    var at_least_one_selected = true;
+                    if(theform.program_id.value === "default") {
+                        at_least_one_selected = false;
+                    }
+                    if(theform.report_type.value != "default" && at_least_one_selected === false) {
+                        at_least_one_selected = true;
+                    }
+                    if(theform.severity.value != "default" && at_least_one_selected === false) {
+                        at_least_one_selected = true;
+                    }
+                    if(theform.reported_by.value != "default" && at_least_one_selected === false) {
+                        at_least_one_selected = true;
+                    }
+                    if(theform.date_discovered.value != "" && at_least_one_selected === false) {
+                        at_least_one_selected = true;
+                    }
+                    if(theform.area_id.value != "default" && at_least_one_selected === false) {
+                        at_least_one_selected = true;
+                    }
+                    if(theform.assigned_to.value != "default" && at_least_one_selected === false) {
+                        at_least_one_selected = true;
+                    }
+                    if(theform.status.value != "default" && at_least_one_selected === false) {
+                        at_least_one_selected = true;
+                    }
+                    if(theform.priority.value != "default" && at_least_one_selected === false) {
+                        at_least_one_selected = true;
+                    }
+                    if(theform.resolution.value != "default" && at_least_one_selected === false) {
+                        at_least_one_selected = true;
+                    }
+                    if(theform.resolution_version.value.trim() != "" && at_least_one_selected === false) {
+                        at_least_one_selected = true;
+                    }
+                    if(theform.resolved_by.value != "default" && at_least_one_selected === false) {
+                        at_least_one_selected = true;
+                    }
+                    if(theform.date_resolved.value != "" && at_least_one_selected === false) {
+                        at_least_one_selected = true;
+                    }
+                    if(theform.tested_by.value != "default" && at_least_one_selected === false) {
+                        at_least_one_selected = true;
+                    }
+                    if(theform.date_tested.value != "" && at_least_one_selected === false){
+                        at_least_one_selected = true;
+                    }
+                    /*
+                    if(isset(theform.treat_deferred) && theform.treat_deferred.value === 'True' && at_least_one_selected === false) {
+                        at_least_one_selected = true;
+                    }
+                    */
 
-                if(at_least_one_selected === true) {
-                    return true;
-                } else {
-                    alert ("At least one search term must be selected/filled in.");
-                    return false;
+                    if(at_least_one_selected === true) {
+                        return true;
+                    } else {
+                        alert ("At least one search term must be selected/filled in.");
+                        return false;
+                    }
                 }
-
+                
             }
         </script>
+        
     </body>
 </html>

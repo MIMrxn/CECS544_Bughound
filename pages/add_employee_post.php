@@ -28,9 +28,19 @@
                 
                 $conn = new mysqli($servername, $username, $password);
                 mysqli_select_db($conn, "bughound_db");
+                $stmt = $conn->prepare("INSERT INTO employees (first_name, last_name, user_name, password, position, group_num, is_reporter, user_level) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("sssssisi", $first_name, $last_name, $user_name, $user_pass, $position, $group_num, $is_reporter, $user_level);
+                $stmt->execute();
+
+                $stmt->close();
+                $conn->close();
+                
+                /*
                 $query = "INSERT INTO employees (first_name, last_name, user_name, password, position, group_num, is_reporter, user_level) VALUES ('".$first_name."','".$last_name."','".$user_name."','".$user_pass."','".$position."','".$group_num."','".$is_reporter."','".$user_level."')";
-                echo $query;
+                //echo $query;
                 mysqli_query($conn, $query);
+                */
+                
                 header("Location: add_employee.php");
                 exit;
             ?>

@@ -98,97 +98,106 @@
                 }
                 */
 
+                $search_type = $_POST['search_reports_submit'];
+
                 $previous_selection_exists = false;
                 //$sql = "SELECT b.report_id, p.program_name, b.report_type, b.severity, b.summary, b.reproducible, b.problem_description, b.suggested_fix, b.reported_by, b.date_discovered, a.area_name, b.assigned_to, b.status, b.priority, b.resolution, b.resolution_version, b.resolved_by, b.date_resolved, b.tested_by, b.date_tested, b.treat_deferred, b.has_attachments, b.comments FROM bugs AS b, programs AS p, areas AS a WHERE ";
                 $sql = "SELECT * FROM bugs as b WHERE ";
-                if($program_id != "default") {
-                    $sql .= " b.program_id = '".$program_id."' ";
-                    $previous_selection_exists = true;
+                
+                if($search_type === "Search") {
+                    if($program_id != "default") {
+                        $sql .= " b.program_id = '".$program_id."' ";
+                        $previous_selection_exists = true;
+                    }
+                    if($report_type != "default" && $previous_selection_exists === true) {
+                        $sql .= " AND b.report_type = '".$report_type."' ";
+                    } else if($report_type != "default" && $previous_selection_exists === false) {
+                        $sql .= " b.report_type = '".$report_type."' ";
+                        $previous_selection_exists = true;
+                    }
+                    if($severity != "default" && $previous_selection_exists === true) {
+                        $sql .= " AND b.severity = '".$severity."' ";
+                    } else if($severity != "default" && $previous_selection_exists === false) {
+                        $sql .= " b.severity = '".$severity."' ";
+                        $previous_selection_exists = true;
+                    }
+                    if($reported_by != "default" && $previous_selection_exists === true) {
+                        $sql .= " AND b.reported_by = '".$reported_by."' ";
+                    } else if($reported_by != "default" && $previous_selection_exists === false) {
+                        $sql .= " b.reported_by = '".$reported_by."' ";
+                        $previous_selection_exists = true;
+                    }
+                    if($date_discovered != "" && $previous_selection_exists === true) {
+                        $sql .= " AND b.date_discovered = '".$date_discovered."' ";
+                    } else if($date_discovered != "" && $previous_selection_exists === false) {
+                        $sql .= " b.date_discovered = '".$date_discovered."' ";
+                        $previous_selection_exists = true;
+                    }
+                    if($area_id != "default" && $previous_selection_exists === true) {
+                        $sql .= " AND b.area_id = '".$area_id."' ";
+                    } else if($area_id != "default" && $previous_selection_exists === false) {
+                        $sql .= " b.area_id = '".$area_id."' ";
+                        $previous_selection_exists = true;
+                    }
+                    if($assigned_to != "default" && $previous_selection_exists === true) {
+                        $sql .= " AND b.assigned_to = '".$assigned_to."' ";
+                    } else if($assigned_to != "default" && $previous_selection_exists === false) {
+                        $sql .= " b.assigned_to = '".$assigned_to."' ";
+                        $previous_selection_exists = true;
+                    }
+                    if($status != "default" && $previous_selection_exists === true) {
+                        $sql .= " AND b.status = '".$status."' ";
+                    } else if($status != "default" && $previous_selection_exists === false) {
+                        $sql .= " b.status = '".$status."' ";
+                        $previous_selection_exists = true;
+                    }
+                    if($priority != "default" && $previous_selection_exists === true) {
+                        $sql .= " AND b.priority = '".$priority."' ";
+                    } else if($priority != "default" && $previous_selection_exists === false) {
+                        $sql .= " b.priority = '".$priority."' ";
+                        $previous_selection_exists = true;
+                    }
+                    if($resolution != "default" && $previous_selection_exists === true) {
+                        $sql .= " AND b.resolution = '".$resolution."' ";
+                    } else if($resolution != "default" && $previous_selection_exists === false) {
+                        $sql .= " b.resolution = '".$resolution."' ";
+                        $previous_selection_exists = true;
+                    }
+                    if($resolution_version != "" && $previous_selection_exists === true) {
+                        $sql .= " AND b.resolution_version = '".$resolution_version."' ";
+                    } else if($resolution_version != "" && $previous_selection_exists === false) {
+                        $sql .= " b.resolution_version = '".$resolution_version."' ";
+                        $previous_selection_exists = true;
+                    }
+                    if($resolved_by != "default" && $previous_selection_exists === true) {
+                        $sql .= " AND b.resolved_by = '".$resolved_by."' ";
+                    } else if($resolved_by != "default" && $previous_selection_exists === false) {
+                        $sql .= " b.resolved_by = '".$resolved_by."' ";
+                        $previous_selection_exists = true;
+                    }
+                    if($date_resolved != "" && $previous_selection_exists === true) {
+                        $sql .= " AND b.date_resolved = '".$date_resolved."' ";
+                    } else if($date_resolved != "" && $previous_selection_exists === false) {
+                        $sql .= " b.date_resolved = '".$date_resolved."' ";
+                        $previous_selection_exists = true;
+                    }
+                    if($tested_by != "default" && $previous_selection_exists === true) {
+                        $sql .= " AND b.tested_by = '".$tested_by."' ";
+                    } else if($tested_by != "default" && $previous_selection_exists === false) {
+                        $sql .= " b.tested_by = '".$tested_by."' ";
+                        $previous_selection_exists = true;
+                    }
+                    if($date_tested != "" && $previous_selection_exists === true) {
+                        $sql .= " AND b.date_tested = '".$date_tested."' ";
+                    } else if($date_tested != "" && $previous_selection_exists === false) {
+                        $sql .= " b.date_tested = '".$date_tested."' ";
+                        $previous_selection_exists = true;
+                    }
+                    $sql .= "AND is_visible = 1";
+                } else {
+                    $sql .= "is_visible = 1";
                 }
-                if($report_type != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND b.report_type = '".$report_type."' ";
-                } else if($report_type != "default" && $previous_selection_exists === false) {
-                    $sql .= " b.report_type = '".$report_type."' ";
-                    $previous_selection_exists = true;
-                }
-                if($severity != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND b.severity = '".$severity."' ";
-                } else if($severity != "default" && $previous_selection_exists === false) {
-                    $sql .= " b.severity = '".$severity."' ";
-                    $previous_selection_exists = true;
-                }
-                if($reported_by != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND b.reported_by = '".$reported_by."' ";
-                } else if($reported_by != "default" && $previous_selection_exists === false) {
-                    $sql .= " b.reported_by = '".$reported_by."' ";
-                    $previous_selection_exists = true;
-                }
-                if($date_discovered != "" && $previous_selection_exists === true) {
-                    $sql .= " AND b.date_discovered = '".$date_discovered."' ";
-                } else if($date_discovered != "" && $previous_selection_exists === false) {
-                    $sql .= " b.date_discovered = '".$date_discovered."' ";
-                    $previous_selection_exists = true;
-                }
-                if($area_id != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND b.area_id = '".$area_id."' ";
-                } else if($area_id != "default" && $previous_selection_exists === false) {
-                    $sql .= " b.area_id = '".$area_id."' ";
-                    $previous_selection_exists = true;
-                }
-                if($assigned_to != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND b.assigned_to = '".$assigned_to."' ";
-                } else if($assigned_to != "default" && $previous_selection_exists === false) {
-                    $sql .= " b.assigned_to = '".$assigned_to."' ";
-                    $previous_selection_exists = true;
-                }
-                if($status != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND b.status = '".$status."' ";
-                } else if($status != "default" && $previous_selection_exists === false) {
-                    $sql .= " b.status = '".$status."' ";
-                    $previous_selection_exists = true;
-                }
-                if($priority != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND b.priority = '".$priority."' ";
-                } else if($priority != "default" && $previous_selection_exists === false) {
-                    $sql .= " b.priority = '".$priority."' ";
-                    $previous_selection_exists = true;
-                }
-                if($resolution != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND b.resolution = '".$resolution."' ";
-                } else if($resolution != "default" && $previous_selection_exists === false) {
-                    $sql .= " b.resolution = '".$resolution."' ";
-                    $previous_selection_exists = true;
-                }
-                if($resolution_version != "" && $previous_selection_exists === true) {
-                    $sql .= " AND b.resolution_version = '".$resolution_version."' ";
-                } else if($resolution_version != "" && $previous_selection_exists === false) {
-                    $sql .= " b.resolution_version = '".$resolution_version."' ";
-                    $previous_selection_exists = true;
-                }
-                if($resolved_by != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND b.resolved_by = '".$resolved_by."' ";
-                } else if($resolved_by != "default" && $previous_selection_exists === false) {
-                    $sql .= " b.resolved_by = '".$resolved_by."' ";
-                    $previous_selection_exists = true;
-                }
-                if($date_resolved != "" && $previous_selection_exists === true) {
-                    $sql .= " AND b.date_resolved = '".$date_resolved."' ";
-                } else if($date_resolved != "" && $previous_selection_exists === false) {
-                    $sql .= " b.date_resolved = '".$date_resolved."' ";
-                    $previous_selection_exists = true;
-                }
-                if($tested_by != "default" && $previous_selection_exists === true) {
-                    $sql .= " AND b.tested_by = '".$tested_by."' ";
-                } else if($tested_by != "default" && $previous_selection_exists === false) {
-                    $sql .= " b.tested_by = '".$tested_by."' ";
-                    $previous_selection_exists = true;
-                }
-                if($date_tested != "" && $previous_selection_exists === true) {
-                    $sql .= " AND b.date_tested = '".$date_tested."' ";
-                } else if($date_tested != "" && $previous_selection_exists === false) {
-                    $sql .= " b.date_tested = '".$date_tested."' ";
-                    $previous_selection_exists = true;
-                }
+                
 
                 //echo $sql;
                 
