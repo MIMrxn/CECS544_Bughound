@@ -18,10 +18,19 @@
 
             $area_id = $_GET['area_id'];
             
+            /*
             $query = " UPDATE areas SET is_visible = 0 WHERE area_id = '".$area_id."' ";
             //echo $query;
             mysqli_query($conn, $query);
+            */
+
+            $stmt = $conn->prepare("UPDATE areas SET is_visible = 0 WHERE area_id = ?");
+            $stmt->bind_param("i", $area_id);
+            $stmt->execute();
+
+            $stmt->close();
             $conn->close();
+
             header("Location: manage_functional_areas.php");
             exit;
         ?>

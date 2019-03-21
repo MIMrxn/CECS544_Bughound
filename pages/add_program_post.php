@@ -19,11 +19,19 @@
                 
                 $conn = new mysqli($servername, $username, $password);
                 mysqli_select_db($conn, "bughound_db");
-				
+				$stmt = $conn->prepare("INSERT INTO programs (program_name, program_release, program_version, program_release_date) VALUES (?, ?, ?, ?)");
+                $stmt->bind_param("siis", $program_name, $program_release, $program_version, $program_release_date);
+                $stmt->execute();
+
+                $stmt->close();
+                $conn->close();
+
+                /*
                 $query = "INSERT INTO programs (program_name, program_release, program_version, program_release_date) VALUES ('".$program_name."','".$program_release."','".$program_version."','".$program_release_date."')";
-				
                 //echo $query;
                 mysqli_query($conn, $query);
+                */
+                
                 header("Location: index.php");
                 exit;
             ?>

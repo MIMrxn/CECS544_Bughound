@@ -18,10 +18,19 @@
 
             $emp_id = $_GET['emp_id'];
             
+            /*
             $query = "UPDATE employees SET is_visible = 0 WHERE employee_id = '".$emp_id."'";
             //echo $query;
             mysqli_query($conn, $query);
+            */
+
+            $stmt = $conn->prepare("UPDATE employees SET is_visible = 0 WHERE employee_id = ?");
+            $stmt->bind_param("i", $emp_id);
+            $stmt->execute();
+
+            $stmt->close();
             $conn->close();
+            
             header("Location: manage_employees.php");
             exit;
         ?>

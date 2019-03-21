@@ -47,15 +47,9 @@
         </ul>
 		
 		<h2><center><font color="gray">Export Tables</font></center></h2>
+
          <div class="vertical-menu">
-            <a href="exportbugs_xml_post.php">Export <i>bugs</i> as XML</a> 
-			<a href="exportprograms_xml_post.php">Export <i>programs</i> as XML</a> 
-			<a href="exportareas_xml_post.php">Export <i>areas</i> as XML</a> 
-			<a href="exportemployees_xml_post.php">Export <i>employees</i> as XML</a> 
-			<a href="exportbugs_text_post.php">Export <i>bugs</i> as ASCII text</a> 
-			<a href="exportprograms_text_post.php">Export <i>programs</i> as ASCII text</a> 
-			<a href="exportareas_text_post.php">Export <i>areas</i> as ASCII text</a> 
-			<a href="exportemployees_text_post.php">Export <i>employees</i> as ASCII text</a> 
+            <a href="export_tables_post.php">Export tables as XML</a> 
         </div>
         
 

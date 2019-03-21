@@ -17,9 +17,20 @@
                 
                 $conn = new mysqli($servername, $username, $password);
                 mysqli_select_db($conn, "bughound_db");
+                
+                $stmt = $conn->prepare("INSERT INTO areas (area_name, program_id) VALUES (?, ?)");
+                $stmt->bind_param("si", $area_name, $program_id);
+                $stmt->execute();
+
+                $stmt->close();
+                $conn->close();
+
+                /*
                 $query = "INSERT INTO areas (area_name, program_id) VALUES ('".$area_name."', '".$program_id."')";
                 //echo $query;
                 mysqli_query($conn, $query);
+                */
+
                 header("Location: add_functional_area.php");
                 exit;
             ?>
