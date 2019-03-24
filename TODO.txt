@@ -1,4 +1,5 @@
 TODO:
+- FIX user_level and user_name overrides
 
 - RESOLVED
 	- Database revisions

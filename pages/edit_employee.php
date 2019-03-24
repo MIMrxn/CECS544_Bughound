@@ -35,8 +35,8 @@
 
             session_start();
             if(isset($_SESSION['user_name']) && isset($_SESSION['user_level'])) {
-                $user_level = $_SESSION['user_level'];
-                $user_name = $_SESSION['user_name'];
+                $sess_user_level = $_SESSION['user_level'];
+                $sess_user_name = $_SESSION['user_name'];
             }
         ?>
         <ul>
@@ -48,9 +48,9 @@
                     <?php
                         // See if user that logged in is of manager level (user level of 5)
                         session_start();
-                        $user_level = $_SESSION['user_level'];
+                        $sess_user_level = $_SESSION['user_level'];
                         
-                        if($user_level == 5) {
+                        if($sess_user_level == 5) {
                             echo '<a href="search_reports.php?source=update">Update</a>';
                         }
                     ?>
@@ -59,9 +59,9 @@
             </li>
             <?php
                 // See if user that logged in is of manager level (user level of 5)
-                $user_level = $_SESSION['user_level'];
+                $sess_user_level = $_SESSION['user_level'];
                 
-                if($user_level == 5) {
+                if($sess_user_level == 5) {
                     echo '<li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Manage Database</a>
                     <div class="dropdown-content">

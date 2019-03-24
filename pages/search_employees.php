@@ -10,8 +10,8 @@
         <?php
             session_start();
             if(isset($_SESSION['user_name']) && isset($_SESSION['user_level'])) {
-                $user_level = $_SESSION['user_level'];
-                $user_name = $_SESSION['user_name'];
+                $sess_user_level = $_SESSION['user_level'];
+                $sess_user_name = $_SESSION['user_name'];
             }
         ?>
         <ul>
@@ -26,7 +26,7 @@
                             <a href="search_reports.php?source=search">Search</a>
                         </div>
                     </li>';
-                    if($user_level == 5) {
+                    if($sess_user_level == 5) {
                         echo '<li class="dropdown">
                         <a href="javascript:void(0)" class="dropbtn, active">Manage Database</a>
                         <div class="dropdown-content">
@@ -37,7 +37,7 @@
                         </div>
                         </li>';
                         echo '<li style="float:right"><a href="logout.php">Logout</a></li>';
-                        echo '<li style="float:right"><a>Welcome, '.$user_name.'</a></li>';
+                        echo '<li style="float:right"><a>Welcome, '.$sess_user_name.'</a></li>';
                     }
                 } else {
                     echo '<li style="float:right"><a href="login.php">Login</a></li>';
