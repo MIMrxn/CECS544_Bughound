@@ -67,12 +67,26 @@
                             <?php
                                 $sql = "SELECT program_id, program_name, program_release, program_version FROM programs WHERE is_visible = 1";
                                 $result = $conn->query($sql);
+                                
+                                $programs_array = [];
+                                $count = 0;
+                                class Program {
+                                    public $pID = 0;
+                                    public $pName = "";
+                                    public $pAreas = [];
+                                }
+
                                 while($row=$result->fetch_assoc()) {
                                     $program_id = $row['program_id'];
                                     $program_name = $row['program_name'];
                                     $program_release = $row['program_release'];
                                     $program_version = $row['program_version'];
                                     echo '<option value="'.$program_id.'">'.$program_name.' Rel. '.$program_release.' Ver. '.$program_version.'</option>';
+                                
+                                    $program = new Program();
+                                    $program->pID = $program_id;
+                                    $program->pName = $program_name;
+                                    $programs_array[$count++] = $program;
                                 }
                             ?>
                         </select>
@@ -151,11 +165,30 @@
                             <?php
                                 $sql = "SELECT area_id, area_name, program_id FROM areas WHERE is_visible = 1";
                                 $result = $conn->query($sql);
+                                
+                                class Area {
+                                    public $aID = 0;
+                                    public $aName = "";
+                                }
+
+                                $length = count($programs_array);
                                 while($row=$result->fetch_assoc()) {
                                     $area_id = $row['area_id'];
                                     $area_name = $row['area_name'];
                                     $program_id = $row['program_id'];
-                                    echo '<option data-program="'.$program_id.'" value="'.$area_id.'">'.$area_name.'</option>';
+                                    //echo '<option data-program="'.$program_id.'" value="'.$area_id.'">'.$area_name.'</option>';
+
+                                    
+                                    for($i=0; $i<$length; $i++) {
+                                        $program = $programs_array[$i];
+                                        if($program->pID === $program_id) {
+                                            //$program->pAreas[] = $area_name;
+                                            $area = new Area();
+                                            $area->aID = $area_id;
+                                            $area->aName = $area_name;
+                                            $program->pAreas[] = $area;
+                                        }
+                                    }
                                 }
                             ?>
                         </select>
@@ -283,22 +316,41 @@
 
         <script language=Javascript>
             function updateAreas() {
+                
                 var programs = document.getElementById('programs');
                 var programID = programs.value;
-                var areas = document.getElementById('areas');
-                
+                var area_opts = document.getElementById('areas');                
+
+                <?php
+                    $pLength = count($programs_array);
+                    //echo 'console.log("'.$length.'");';
+                    for($i=0; $i<$pLength; $i++) {
+                        $program = $programs_array[$i];
+                        //echo 'console.log("'.$program->pName.'");';
+                        $aLength = count($program->pAreas);
+                        for($j=0; $j<$aLength; $j++) {
+                            //echo 'console.log("'.$program->pAreas[$j]->aID.'");';
+                            echo 'var opt = document.createElement("option");';
+                            echo 'opt.value = "'.$program->pAreas[$j]->aID.'";';
+                            echo 'opt.text = "'.$program->pAreas[$j]->aName.'";';
+                            echo 'opt.setAttribute("data-program", "'.$program->pID.'");';
+                            echo 'area_opts.add(opt);';
+                        }
+                    }
+                ?>
+
                 var values = [];
                 var texts = [];
                 var data = [];
 
-                for(var i=0; i<areas.length; i++) {
-                    values[i] = areas[i].value;
-                    texts[i] = areas[i].text;
-                    data[i] = areas[i].getAttribute('data-program');
+                for(var i=0; i<area_opts.length; i++) {
+                    values[i] = area_opts[i].value;
+                    texts[i] = area_opts[i].text;
+                    data[i] = area_opts[i].getAttribute('data-program');
                 }
 
-                while(areas.options.length > 1) {
-                    areas.remove(areas.options.length - 1);
+                while(area_opts.options.length > 1) {
+                    area_opts.remove(area_opts.options.length - 1);
                 }
 
                 for(var i=0; i<values.length; i++) {
@@ -306,9 +358,11 @@
                         var opt = document.createElement("option");
                         opt.value = values[i];
                         opt.text = texts[i];
-                        areas.add(opt);
+                        opt.setAttribute("data-program", programID);
+                        area_opts.add(opt);
                     }
                 }
+
             }
         </script>
 

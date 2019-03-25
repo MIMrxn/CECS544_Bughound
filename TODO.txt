@@ -1,5 +1,4 @@
 TODO:
-- FIX user_level and user_name overrides
 
 - RESOLVED
 	- Database revisions
@@ -23,4 +22,5 @@ TODO:
 		- Export tables separately 
 			- In ASCII text
 			- In XML		
-		
+		- Fixed sessions bugs
+		- Fixed areas dropdown in "create new bug" section
