@@ -56,8 +56,12 @@
             }
             if($status === "default") {
                 $status = NULL;
+				$is_visible = 1;
             }else if($status === "closed") {
 				$is_visible = 0;
+			}
+			else {
+				$is_visible = 1;
 			}
 			
             if($priority === "default") {
