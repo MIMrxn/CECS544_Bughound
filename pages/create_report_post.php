@@ -56,7 +56,10 @@
             }
             if($status === "default") {
                 $status = NULL;
-            }
+            }else if($status === "closed") {
+				$is_visible = 0;
+			}
+			
             if($priority === "default") {
                 $priority = NULL;
             }
@@ -81,8 +84,8 @@
 
             $conn = new mysqli($servername, $username, $password);
             mysqli_select_db($conn, "bughound_db");
-            $stmt = $conn->prepare("INSERT INTO bugs (program_id, report_type, severity, summary, reproducible, problem_description, suggested_fix, reported_by, date_discovered, area_id, assigned_to, status, priority, resolution, resolution_version, resolved_by, date_resolved, tested_by, date_tested, treat_deferred, has_attachments, comments) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("isissssisiisisiisissss", $program_id, $report_type, $severity, $summary, $reproducible, $problem_description, $suggested_fix, $reported_by, $date_discovered, $area_id, $assigned_to, $status, $priority, $resolution, $resolution_version, $resolved_by, $date_resolved, $tested_by, $date_tested, $treat_deferred, $has_attachments, $comments);
+            $stmt = $conn->prepare("INSERT INTO bugs (program_id, report_type, severity, summary, reproducible, problem_description, suggested_fix, reported_by, date_discovered, area_id, assigned_to, status, priority, resolution, resolution_version, resolved_by, date_resolved, tested_by, date_tested, treat_deferred, has_attachments, comments, is_visible) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("isissssisiisisiisissssi", $program_id, $report_type, $severity, $summary, $reproducible, $problem_description, $suggested_fix, $reported_by, $date_discovered, $area_id, $assigned_to, $status, $priority, $resolution, $resolution_version, $resolved_by, $date_resolved, $tested_by, $date_tested, $treat_deferred, $has_attachments, $comments, $is_visible);
             $stmt->execute();
             
             $stmt->close();
