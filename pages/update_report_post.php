@@ -64,6 +64,10 @@
             if($status === "default") {
                 $status = NULL;
             }
+			else if($status === "closed") {
+				$is_visible = 0;
+			}
+			
             if($priority === "default") {
                 $priority = NULL;
             }
@@ -86,13 +90,24 @@
                 $date_tested = NULL;
             }
 
-            $stmt = $conn->prepare("UPDATE bugs SET program_id = ?, report_type = ?, severity = ?, summary = ?, reproducible = ?, problem_description = ?, suggested_fix = ?, reported_by = ?, date_discovered = ?, area_id = ?, assigned_to = ?, status = ?, priority = ?, resolution = ?, resolution_version = ?, resolved_by = ?, date_resolved = ?, tested_by = ?, date_tested = ?, treat_deferred = ?, has_attachments = ?, comments = ? WHERE report_id = ?");
-            $stmt->bind_param("isissssisiisisiisissssi", $program_id, $report_type, $severity, $summary, $reproducible, $problem_description, $suggested_fix, $reported_by, $date_discovered, $area_id, $assigned_to, $status, $priority, $resolution, $resolution_version, $resolved_by, $date_resolved, $tested_by, $date_tested, $treat_deferred, $has_attachments, $comments, $report_id);
+            $stmt = $conn->prepare("UPDATE bugs SET program_id = ?, report_type = ?, severity = ?, summary = ?, reproducible = ?, problem_description = ?, suggested_fix = ?, reported_by = ?, date_discovered = ?, area_id = ?, assigned_to = ?, status = ?, priority = ?, resolution = ?, resolution_version = ?, resolved_by = ?, date_resolved = ?, tested_by = ?, date_tested = ?, treat_deferred = ?, has_attachments = ?, comments = ?, is_visible = ? WHERE report_id = ?");
+            $stmt->bind_param("isissssisiisisiisissssii", $program_id, $report_type, $severity, $summary, $reproducible, $problem_description, $suggested_fix, $reported_by, $date_discovered, $area_id, $assigned_to, $status, $priority, $resolution, $resolution_version, $resolved_by, $date_resolved, $tested_by, $date_tested, $treat_deferred, $has_attachments, $comments, $is_visible, $report_id);
             $stmt->execute();
-            
+			
+			/**
+			if($status === "closed") {
+				$stmt = $conn->prepare("UPDATE bugs SET is_visible = 0, WHERE report_id = ?");
+				$stmt->bind_param("i", $program_id);
+				$stmt->execute();
+				$stmt->close();
+            }	
+			*/			
+			
             $stmt->close();
             $conn->close();
-            
+			
+
+			
             header("Location: index.php");
             exit;
             
