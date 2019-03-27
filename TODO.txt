@@ -1,26 +1,5 @@
 TODO:
 
-- RESOLVED
-	- Database revisions
-		- Make program NOT unique
-		- Link functional areas to programs
-		- Add visible boolean to tables
-	- Bughound revisions
-		- Programs
-			- Programs now allows for non unique insertion
-			- Add support for new DB to all management functions (add, edit, delete, search)
-		- Areas
-			- Support to add areas to a program
-			- Management functions (add, edit, delete, search) now supported in new DB.
-		- Employees
-			- Add support for new DB to all management functions (add, edit, delete, search)
-		- Reports
-			- Add support for creating report with new DB
-			- Add support for new DB to all management functions (update, search)
-		- Search for all reports defaults to searching for OPEN bugs
-		- Deleting programs/employees/areas shouldn't delete them from the database, only from searching for bug reports (dropdowns)
-		- Export tables separately 
-			- In ASCII text
-			- In XML		
-		- Fixed sessions bugs
-		- Fixed areas dropdown in "create new bug" section
+- Get report_id from bug report to add to attachments table
+- Get the attachment from attachments table on "update bug report"
+- DB changes??? (maybe, maybe not)

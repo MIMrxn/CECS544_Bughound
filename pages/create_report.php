@@ -56,7 +56,7 @@
 
         <h2><center><font color="gray">New Bug Report Entry</font></center></h2>
         
-        <form name="new_report_form" action="create_report_post.php" method="post" onsubmit="return validate(this)">
+        <form name="new_report_form" action="create_report_post.php" method="post" onsubmit="return validate(this)" enctype="multipart/form-data" >
             <table>
                 <tr>
                     <td>Program:</td>
@@ -305,7 +305,7 @@
                 </tr>
                 <tr>
                     <td>Attachments:</td>
-                    <td><input type="file" name="attachments"></td>
+                    <td><input type="file" name="attachments" id="attachments"></td>
                 </tr>
             </table>
 

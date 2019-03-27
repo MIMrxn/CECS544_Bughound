@@ -41,11 +41,46 @@
             } else {
                 $treat_deferred = 0;
             }
-            if($_POST['attachments'] == "") {
-                $has_attachments = 0;
-            } else {
-                $has_attachments = 1;
-            }
+			
+			if(isset($_FILES)){
+				$has_attachments = 1;
+				$target_dir = "C:/xampp/htdocs/CECS544_Bughound/uploads/"; // change this directory to whatever you want the file to be saved on 
+				$target_file = $target_dir . basename($_FILES["attachments"]["name"]); // file name
+				$uploadOk = 1;
+				$file_name = basename($_FILES["attachments"]["name"]);
+				$fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION)); // file type
+				
+				// Check if file already exists
+				if (file_exists($target_file)) {
+					echo "Sorry, file already exists.";
+					$uploadOk = 0;
+				}
+
+				// Check if $uploadOk is set to 0 by an error
+				if ($uploadOk == 0) {
+					echo "Sorry, your file was not uploaded.";
+				// if everything is ok, try to upload file
+				} else {
+					if (move_uploaded_file($_FILES["attachments"]["tmp_name"], $target_file)) {
+						echo "The file ". basename( $_FILES["attachments"]["name"]). " has been uploaded.";
+					} else {
+						echo "Sorry, there was an error uploading your file.";
+					}
+				}		
+				
+				//$report_id = _POST['report_id'];
+				
+				$conn = new mysqli($servername, $username, $password);
+				mysqli_select_db($conn, "bughound_db");
+				$stmt = $conn->prepare("INSERT INTO attachments (file_name, file_type) VALUES (?, ?)");
+				$stmt->bind_param("ss", $file_name, $fileType);
+				$stmt->execute();
+			}
+			else {
+				$has_attachments = 0;
+			}
+			
+			
             $comments = $_POST['comments'];
 
             if($area_id === "default") {
@@ -61,9 +96,8 @@
 				$is_visible = 0;
 			}
 			else {
-				$is_visible = 1;
-			}
-			
+				$is_visible = 0;
+			}		
             if($priority === "default") {
                 $priority = NULL;
             }
