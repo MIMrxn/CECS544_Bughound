@@ -87,7 +87,7 @@
 
         <h2><center><font color="gray">Update Bug Report</font></center></h2>
 
-        <form name="update_report_form" action="update_report_post.php?report_id=<?php echo $report_id; ?>" method="post" onsubmit="return validate(this)">
+        <form name="update_report_form" action="update_report_post.php?report_id=<?php echo $report_id; ?>" method="post" onsubmit="return validate(this)" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td>Program:</td>
