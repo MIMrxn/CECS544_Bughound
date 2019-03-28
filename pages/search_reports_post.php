@@ -219,11 +219,55 @@
                     $program_name = $row_p[0];
                     $area_name = $row_a[0];
 
+                    $reported_by_id = $row[8];
+                    $assigned_to_id = $row[11];
+                    $resolved_by_id = $row[16];
+                    $tested_by_id = $row[18];
+
+                    $sql_get_names = "SELECT CONCAT(first_name, ' ', last_name) as employee_name FROM employees WHERE employee_id = '".$reported_by_id."'";
+                    $result_emp_names = $conn->query($sql_get_names);
+                    $names_row=$result_emp_names->fetch_assoc();
+                    $reported_by_name = $names_row['employee_name'];
+
+                    $assigned_to_name = "";
+                    $resolved_by_name = "";
+                    $tested_by_name = "";
+                    $file_name = "";
+
+                    if($assigned_to_id != NULL) {
+                        $sql_get_names = "SELECT CONCAT(first_name, ' ', last_name) as employee_name FROM employees WHERE employee_id = '".$assigned_to_id."'";
+                        $result_emp_names = $conn->query($sql_get_names);
+                        $names_row=$result_emp_names->fetch_assoc();
+                        $assigned_to_name = $names_row['employee_name'];
+                    }
+                    if($resolved_by_id != NULL) {
+                        $sql_get_names = "SELECT CONCAT(first_name, ' ', last_name) as employee_name FROM employees WHERE employee_id = '".$resolved_by_id."'";
+                        $result_emp_names = $conn->query($sql_get_names);
+                        $names_row=$result_emp_names->fetch_assoc();
+                        $resolved_by_name = $names_row['employee_name'];
+                    }
+                    if($tested_by_id != NULL) {
+                        $sql_get_names = "SELECT CONCAT(first_name, ' ', last_name) as employee_name FROM employees WHERE employee_id = '".$tested_by_id."'";
+                        $result_emp_names = $conn->query($sql_get_names);
+                        $names_row=$result_emp_names->fetch_assoc();
+                        $tested_by_name = $names_row['employee_name'];
+                    }
+
+                    if($row[21] === "1") {
+                        $sql_attach = "SELECT file_name FROM attachments WHERE report_id = '".$row[0]."'";
+                        $attach_result = $conn->query($sql_attach);
+                        $attach_row=$attach_result->fetch_assoc();
+                        $fetched_file_name = $attach_row['file_name'];
+                        $file_name = basename($fetched_file_name);
+                    } else {
+                        $file_name = "NONE";
+                    }
+
                     if($source === 'update') {
-                        printf("<tr><td><a href='update_report.php?report_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$program_name,$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$area_name,$row[11],$row[12],$row[13],$row[14],$row[15],$row[16],$row[17],$row[18],$row[19],$row[20],$row[21],$row[22]);
+                        printf("<tr><td><a href='update_report.php?report_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$program_name,$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$reported_by_name,$row[9],$area_name,$assigned_to_name,$row[12],$row[13],$row[14],$row[15],$resolved_by_name,$row[17],$tested_by_name,$row[19],$row[20],$file_name,$row[22]);
                     }
                     if($source === 'search') {
-                        printf("<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$program_name,$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$area_name,$row[11],$row[12],$row[13],$row[14],$row[15],$row[16],$row[17],$row[18],$row[19],$row[20],$row[21],$row[22]);
+                        printf("<tr><td><a href='view_report.php?report_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$program_name,$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$reported_by_name,$row[9],$area_name,$assigned_to_name,$row[12],$row[13],$row[14],$row[15],$resolved_by_name,$row[17],$tested_by_name,$row[19],$row[20],$file_name,$row[22]);
                     }
                 }
                 echo "</table>";
