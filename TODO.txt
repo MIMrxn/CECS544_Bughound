@@ -1,5 +1,9 @@
 TODO:
 
-- Get report_id from bug report to add to attachments table
+- Add exception handling when file already exists.
 - Get the attachment from attachments table on "update bug report"
 - DB changes??? (maybe, maybe not)
+
+RESOLVED:
+
+- Get report_id from bug report to add to attachments table	
