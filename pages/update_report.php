@@ -456,6 +456,20 @@
                     <td>Attachments:</td>
                     <td><input type="file" name="attachments"></td>
                 </tr>
+                <?php
+                    //echo "console.log('This is the attachments: '".$has_attachments."'');";
+                    if($has_attachments === "1") {
+                        $sql_attach = "SELECT file_name FROM attachments WHERE report_id = '".$report_id."'";
+                        $attach_result = $conn->query($sql_attach);
+                        $attach_row=$attach_result->fetch_assoc();
+                        $file_name = $attach_row['file_name'];
+
+                        echo "<tr>";
+                        echo "<td>Current attachment: </td>";
+                        echo "<td><a href=".$file_name." download>".basename($file_name)."</a></td>";
+                        echo "</tr>";
+                    }
+                ?>
             </table>
 
             <?php

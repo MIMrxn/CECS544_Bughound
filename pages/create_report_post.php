@@ -55,8 +55,9 @@
                 }
                 //echo "console.log('This is the file root: '".$file_root."' ')";
                 //echo "console.log('This is the curr file: '".$current_page."' ')";
-                //echo "console.log('This is the where to store file: '".$target_dir."' ')";
-				$target_file = $target_dir . basename($_FILES["attachments"]["name"]); // file name
+                //echo "console.log('This is where to store the file: '".$target_dir."' ')";
+				$target_file = $target_dir . basename($_FILES["attachments"]["name"]);
+                $db_file_name = $mid_path . "/uploads/" . basename($_FILES["attachments"]["name"]);
 				$uploadOk = 1;
 				$file_name = basename($_FILES["attachments"]["name"]);
 				$fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION)); // file type
@@ -88,7 +89,7 @@
 				$conn = new mysqli($servername, $username, $password);
 				mysqli_select_db($conn, "bughound_db");
 				$stmt = $conn->prepare("INSERT INTO attachments (file_name, file_type) VALUES (?, ?)");
-				$stmt->bind_param("ss", $target_file, $fileType);
+				$stmt->bind_param("ss", $db_file_name, $fileType);
 				$stmt->execute();
 			}
 			else {
