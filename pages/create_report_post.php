@@ -44,7 +44,7 @@
             $has_attachments = 0;
 			
             //echo "this is file set: ".count($_FILES);
-			if(isset($_FILES)){
+			if(is_uploaded_file($_FILES['attachments']['tmp_name'])){
 				$has_attachments = 1;
                 $file_root = $_SERVER['DOCUMENT_ROOT']; // root path
                 $current_page = basename(__FILE__); // current page name
