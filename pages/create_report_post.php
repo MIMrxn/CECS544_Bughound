@@ -41,7 +41,9 @@
             } else {
                 $treat_deferred = 0;
             }
+            $has_attachments = 0;
 			
+            //echo "this is file set: ".count($_FILES);
 			if(isset($_FILES)){
 				$has_attachments = 1;
                 $file_root = $_SERVER['DOCUMENT_ROOT']; // root path
@@ -92,10 +94,6 @@
 				$stmt->bind_param("ss", $db_file_name, $fileType);
 				$stmt->execute();
 			}
-			else {
-				$has_attachments = 0;
-			}
-			
 			
             $comments = $_POST['comments'];
 

@@ -17,6 +17,7 @@
             mysqli_select_db($conn, "bughound_db");
 
             $report_id = $_GET['report_id'];
+            echo $report_id;
 
             $program_id = $_POST['program_id'];
             $report_type = $_POST['report_type'];
@@ -104,10 +105,10 @@
 				$sql_report = "SELECT report_id FROM bugs ORDER BY report_id DESC LIMIT 1";
                 $report_result = $conn->query($sql_report);
                 $report_row=$report_result->fetch_assoc();
-				$report_id = $report_row['report_id'];
+				$last_report_id = $report_row['report_id'];
 				
 				$stmt = $conn->prepare("UPDATE attachments SET file_name = ?, file_type = ? WHERE report_id = ?");
-				$stmt->bind_param("ssi", $db_file_name, $fileType, $report_id);
+				$stmt->bind_param("ssi", $db_file_name, $fileType, $last_report_id);
 				$stmt->execute();
 			}
 			else {
@@ -156,13 +157,16 @@
                 $date_tested = NULL;
             }
 
+            echo $report_id;
+
             $stmt = $conn->prepare("UPDATE bugs SET program_id = ?, report_type = ?, severity = ?, summary = ?, reproducible = ?, problem_description = ?, suggested_fix = ?, reported_by = ?, date_discovered = ?, area_id = ?, assigned_to = ?, status = ?, priority = ?, resolution = ?, resolution_version = ?, resolved_by = ?, date_resolved = ?, tested_by = ?, date_tested = ?, treat_deferred = ?, has_attachments = ?, comments = ?, is_visible = ? WHERE report_id = ?");
             $stmt->bind_param("isissssisiisisiisissssii", $program_id, $report_type, $severity, $summary, $reproducible, $problem_description, $suggested_fix, $reported_by, $date_discovered, $area_id, $assigned_to, $status, $priority, $resolution, $resolution_version, $resolved_by, $date_resolved, $tested_by, $date_tested, $treat_deferred, $has_attachments, $comments, $is_visible, $report_id);
             $stmt->execute();
+
 			
             $stmt->close();
             $conn->close();
-				
+			
             header("Location: index.php");
             exit;
             
