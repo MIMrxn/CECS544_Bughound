@@ -202,7 +202,9 @@
 					$get_fileid_row=$get_fileid_result->fetch_assoc();
 					//echo "console.log('This is the att id: ".$get_fileid_row['file_id']."');";
 
-					$update_sql = "UPDATE attachments SET report_id = '".$get_reportid_row['report_id']."' WHERE file_id = '".$get_fileid_row['file_id']."'";
+					
+					//$update_sql = "UPDATE attachments SET report_id = '".$get_reportid_row['report_id']."' WHERE file_id = '".$get_fileid_row['file_id']."'";
+					$update_sql = "UPDATE attachments SET report_id = '".$report_id."' WHERE file_id = '".$get_fileid_row['file_id']."'";
 					//echo "console.log('This is the sql: ".$update_sql."');";
 
 					$conn->query($update_sql);

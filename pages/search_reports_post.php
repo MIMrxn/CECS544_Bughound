@@ -253,21 +253,28 @@
                         $tested_by_name = $names_row['employee_name'];
                     }
 
+                    $file_name_strs = "";
                     if($row[21] === "1") {
                         $sql_attach = "SELECT file_name FROM attachments WHERE report_id = '".$row[0]."'";
                         $attach_result = $conn->query($sql_attach);
+                        /*
                         $attach_row=$attach_result->fetch_assoc();
                         $fetched_file_name = $attach_row['file_name'];
                         $file_name = basename($fetched_file_name);
+                        */
+                        
+                        while($attach_row=$attach_result->fetch_assoc()) {
+                            $file_name_strs .= basename($attach_row['file_name']) . "\n";
+                        }
                     } else {
-                        $file_name = "NONE";
+                        $file_name_strs = "NONE";
                     }
 
                     if($source === 'update') {
-                        printf("<tr><td><a href='update_report.php?report_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$program_name,$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$reported_by_name,$row[9],$area_name,$assigned_to_name,$row[12],$row[13],$row[14],$row[15],$resolved_by_name,$row[17],$tested_by_name,$row[19],$row[20],$file_name,$row[22]);
+                        printf("<tr><td><a href='update_report.php?report_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$program_name,$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$reported_by_name,$row[9],$area_name,$assigned_to_name,$row[12],$row[13],$row[14],$row[15],$resolved_by_name,$row[17],$tested_by_name,$row[19],$row[20],$file_name_strs,$row[22]);
                     }
                     if($source === 'search') {
-                        printf("<tr><td><a href='view_report.php?report_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$program_name,$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$reported_by_name,$row[9],$area_name,$assigned_to_name,$row[12],$row[13],$row[14],$row[15],$resolved_by_name,$row[17],$tested_by_name,$row[19],$row[20],$file_name,$row[22]);
+                        printf("<tr><td><a href='view_report.php?report_id=%d'>%d</a></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",$row[0],$row[0],$program_name,$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$reported_by_name,$row[9],$area_name,$assigned_to_name,$row[12],$row[13],$row[14],$row[15],$resolved_by_name,$row[17],$tested_by_name,$row[19],$row[20],$file_name_strs,$row[22]);
                     }
                 }
                 echo "</table>";

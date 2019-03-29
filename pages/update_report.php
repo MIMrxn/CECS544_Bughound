@@ -461,6 +461,7 @@
                     if($has_attachments === "1") {
                         $sql_attach = "SELECT file_name FROM attachments WHERE report_id = '".$report_id."'";
                         $attach_result = $conn->query($sql_attach);
+                        /*
                         $attach_row=$attach_result->fetch_assoc();
                         $file_name = $attach_row['file_name'];
 
@@ -468,6 +469,17 @@
                         echo "<td>Current attachment: </td>";
                         echo "<td><a href=".$file_name." download>".basename($file_name)."</a></td>";
                         echo "</tr>";
+                        */
+
+                        $attach_count = 0;
+                        while($attach_row=$attach_result->fetch_assoc()) {
+                            $file_name = $attach_row['file_name'];
+
+                            echo "<tr>";
+                            echo "<td>Attachment ".$attach_count++.": </td>";
+                            echo "<td><a href=".$file_name." download>".basename($file_name)."</a></td>";
+                            echo "</tr>";
+                        }
                     }
                 ?>
             </table>
